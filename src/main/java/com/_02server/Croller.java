@@ -10,14 +10,14 @@ import java.util.List;
 
 public class Croller {
     public static void main(String[] args) {
-        System.err.println("돌아감");
+
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
 
         WebDriver driver = new ChromeDriver(options);
 
         driver.get("https://prod.danawa.com/list/?cate=20322920&15main_20_03");
-        System.out.println("여기까지 옴");
+
         WebElement prodInfo = driver.findElement(By.xpath("//div[@class='prod_info'][contains(text(), '상세 스펙')]"));
         WebElement productNameElement = prodInfo.findElement(By.cssSelector("div.prod_name[name='productName']"));
 
