@@ -15,14 +15,14 @@ public class Croller {
         String csvFilePath = "output-bluetoothEar.csv";
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
 
         WebDriver driver = new ChromeDriver(options);
 
-        String cate = null;// = Integer.toString(CategoryNumber.)
+        String cate = Integer.toString(CategoryNumber.무선이어폰.cate); //여기를 바꿔서
 
         driver.get("https://prod.danawa.com/list/?cate="+cate);
-        for(int i= 2; i<=50; i++) { //(페이지별 파싱 스크립트 통해)
+        for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
 
             Map<String, String> nameConMap = parseThisPage(driver);
 
@@ -49,11 +49,10 @@ public class Croller {
 
                 parsed.put(name,contents);
 
-                //System.out.printf("상품 이름: %s\n내용: %s\n\n",name,contents);
+                System.out.printf("상품 이름: %s\n내용: %s\n\n",name,contents);
 
             } catch(NoSuchElementException noSuchElementException) {
                 //System.out.println("이 페이지 끝\n");
-                break;
             }catch (StaleElementReferenceException staleElementReferenceException) {
                 //System.out.println("이 페이지 끝\n");
                 break;
