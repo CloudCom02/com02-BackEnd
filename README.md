@@ -9,9 +9,8 @@
 - Lombok (편의성)
 
 세팅 값
-- 데이터베이스
-  ㄴ id = root / pw = 3322 포트번호
-- DB : 3306 / SV : 8080
+- 데이터베이스 | id = root / pw = 3322
+- 포트번호 | DB : 3306 / SV : 8080
 
 크롤러용
 - WebDriver - Selenium
