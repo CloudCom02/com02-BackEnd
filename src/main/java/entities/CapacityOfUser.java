@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@Table(name = "Capacity_of_User")
 @AllArgsConstructor
 @NoArgsConstructor
 public class CapacityOfUser {
@@ -27,6 +28,6 @@ public class CapacityOfUser {
 
     // 부모 정의
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent")
+    @JoinColumn(name = "parent_device")
     private Device parentDevice; // 부모기기 ID
 }

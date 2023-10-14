@@ -9,13 +9,14 @@ import java.sql.Time;
 @Getter
 @Setter
 @Builder
+@Table(name = "Device")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="parent_id")
-    private Long parentId;
+    private Long parentId; // 부모 기기 id
 
     @Column(name = "entire_capacity")
     private Double entireCapacity; // 배터리 용량
@@ -29,6 +30,20 @@ public class Device {
     @Column(name = "wattage_W")
     private Double wattage; // 전력량
 
+    @Column(name = "category")
+    private String category; // 분류
+
+    @Column(name = "imageURL")
+    private String imageURL; // 이미지주소
+
+    @Column(name = "is_registered")
+    private String isRegistered; // 직접 등록 여부
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user")
+    private User user; // 사용자 ID
+
+    @OneToMany(mappedBy = "parentId")
     @Column(name = "subDevice")
-    private Device subDevice; // 부속기기
+    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
 }
