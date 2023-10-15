@@ -1,4 +1,4 @@
-package entities;
+package com._02server.com02backendproject.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

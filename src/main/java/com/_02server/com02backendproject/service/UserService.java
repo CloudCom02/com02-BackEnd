@@ -1,17 +1,17 @@
-package service;
+package com._02server.com02backendproject.service;
 
-import dto.UserReq;
-import entities.User;
-import global.BaseException;
+import com._02server.com02backendproject.repository.UserRepository;
+import com._02server.com02backendproject.dto.UserReq;
+import com._02server.com02backendproject.entities.User;
+import com._02server.com02backendproject.global.BaseException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import static global.BaseResponseStatus.USERS_EXISTS_EMAIL;
+import static com._02server.com02backendproject.global.BaseResponseStatus.USERS_EXISTS_EMAIL;
 
 @Slf4j
 @Service

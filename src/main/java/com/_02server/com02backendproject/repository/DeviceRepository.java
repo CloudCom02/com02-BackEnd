@@ -1,6 +1,6 @@
-package repository;
+package com._02server.com02backendproject.repository;
 
-import entities.Device;
+import com._02server.com02backendproject.entities.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

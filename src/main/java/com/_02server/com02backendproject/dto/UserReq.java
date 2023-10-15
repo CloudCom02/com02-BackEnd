@@ -1,4 +1,4 @@
-package dto;
+package com._02server.com02backendproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

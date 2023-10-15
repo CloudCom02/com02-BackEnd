@@ -1,4 +1,4 @@
-package entities;
+package com._02server.com02backendproject.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,8 +42,8 @@ public class Device {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
-
-    @OneToMany(mappedBy = "parentId")
-    @Column(name = "subDevice")
-    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
+    //sy-gwak
+//    @OneToMany(mappedBy = "parentId")
+//    @Column(name = "subDevice")
+//    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
 }

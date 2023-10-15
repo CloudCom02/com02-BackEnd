@@ -1,4 +1,4 @@
-package global;
+package com._02server.com02backendproject.global;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static global.BaseResponseStatus.SUCCESS;
+import static com._02server.com02backendproject.global.BaseResponseStatus.SUCCESS;
 
 @Getter
 @AllArgsConstructor

@@ -1,15 +1,15 @@
-package controller;
+package com._02server.com02backendproject.controller;
 
-import dto.UserReq;
-import global.BaseException;
-import global.BaseResponse;
+import com._02server.com02backendproject.global.BaseResponse;
+import com._02server.com02backendproject.service.UserService;
+import com._02server.com02backendproject.dto.UserReq;
+import com._02server.com02backendproject.global.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
 
 import java.io.IOException;
 
-import static global.BaseResponseStatus.SUCCESS;
+import static com._02server.com02backendproject.global.BaseResponseStatus.SUCCESS;
 
 @RequiredArgsConstructor
 @RestController

@@ -1,4 +1,4 @@
-package global;
+package com._02server.com02backendproject.global;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
