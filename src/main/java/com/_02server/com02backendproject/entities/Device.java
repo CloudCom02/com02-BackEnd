@@ -9,7 +9,7 @@ import java.sql.Time;
 @Getter
 @Setter
 @Builder
-@Table(name = "Device")
+@Table(name = "device")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Device {

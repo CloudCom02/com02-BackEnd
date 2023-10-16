@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@Table(name = "Capacity_of_User")
+@Table(name = "capacity_of_user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class CapacityOfUser {

@@ -5,34 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca439c6-c85e-49c2-ae20-cb397f1bb5f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/config/MvcConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/controller/DatabaseStatusController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/service/CrollerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/hello.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/show-tables.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/Com02BackendProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/Com02BackendProjectApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/CapacityOfUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/controller/CapacityOfUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/controller/DeviceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/UserReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/dto/UserReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/UserRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/dto/UserRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/CapacityOfUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/CapacityOfUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/Device.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/global/BaseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/global/BaseException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/global/BaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/global/BaseResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/global/BaseResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/global/BaseResponseStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/CapacityOfUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/repository/CapacityOfUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DeviceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/repository/DeviceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/CapacityOfUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/service/CapacityOfUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/CrollerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DeviceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/service/DeviceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/CapacityOfUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/CapacityOfUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/Device.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/com02backendproject/entities/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,26 +53,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Github/CloudCom02/com02-BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "spring.configuration.checksum": "e0ad8274fb97d72c51bb776c03cced0e",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Github/CloudCom02/com02-BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e0ad8274fb97d72c51bb776c03cced0e&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
@@ -114,7 +90,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.Com02BackendProjectApplication (1)">
+  <component name="RunManager" selected="Application.com._02server.com02backendproject.Com02BackendProjectApplication">
     <configuration name="Com02BackendProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Com02BackendProjectApplication" />
       <module name="Com02BackendProject.main" />
@@ -128,10 +104,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="2" requestIdentifier="#2" runType="단일 요청 실행">
-      <method v="2" />
+    <configuration name="com._02server.com02backendproject.Com02BackendProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com._02server.com02backendproject.Com02BackendProjectApplication" />
+      <module name="Com02BackendProject.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com._02server.com02backendproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="generated-requests 내 전체" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="2" requestIdentifier="#2" runType="단일 요청 실행">
       <method v="2" />
     </configuration>
     <configuration name="Com02BackendProjectApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -156,9 +145,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Com02BackendProjectApplication (1)" />
-        <item itemvalue="HTTP 요청.generated-requests | #2" />
-        <item itemvalue="HTTP 요청.generated-requests 내 전체" />
+        <item itemvalue="Application.com._02server.com02backendproject.Com02BackendProjectApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -177,6 +164,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
