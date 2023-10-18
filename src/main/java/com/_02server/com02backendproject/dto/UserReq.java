@@ -15,4 +15,13 @@ public class UserReq {
         String email;
         String password;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserLoginReq { // 로그인 요청
+        String email;
+        String password;
+    }
 }

@@ -1,5 +1,6 @@
 package com._02server.com02backendproject.controller;
 
+import com._02server.com02backendproject.dto.UserRes;
 import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.UserService;
 import com._02server.com02backendproject.dto.UserReq;
@@ -25,5 +26,14 @@ public class UserController {
     ) throws BaseException, IOException {
         userService.join(userJoinReq);
         return new BaseResponse<>(SUCCESS);
+    }
+
+    //로그인
+    @PostMapping(value = "/login")
+    public BaseResponse<UserRes.UserLoginRes> login(
+            @RequestBody UserReq.UserLoginReq userLoginReq
+    ) throws BaseException, IOException {
+        UserRes.UserLoginRes userLoginRes = userService.login(userLoginReq);
+        return new BaseResponse<>(userLoginRes);
     }
 }

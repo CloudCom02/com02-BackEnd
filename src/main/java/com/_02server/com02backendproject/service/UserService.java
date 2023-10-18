@@ -1,5 +1,6 @@
 package com._02server.com02backendproject.service;
 
+import com._02server.com02backendproject.dto.UserRes;
 import com._02server.com02backendproject.repository.UserRepository;
 import com._02server.com02backendproject.dto.UserReq;
 import com._02server.com02backendproject.entities.User;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static com._02server.com02backendproject.global.BaseResponseStatus.USERS_EXISTS_EMAIL;
+import static com._02server.com02backendproject.global.BaseResponseStatus.USERS_NOT_EXISTS;
 
 @Slf4j
 @Service
@@ -33,6 +35,18 @@ public class UserService {
             userRepository.saveAndFlush(user);
         } else {
             throw new BaseException(USERS_EXISTS_EMAIL);
+        }
+    }
+
+    public UserRes.UserLoginRes login(UserReq.UserLoginReq userLoginReq) throws BaseException, IOException {
+
+        Optional<User> userOptional = userRepository.findByEmail(userLoginReq.getEmail());
+
+        if (userOptional.isEmpty()) {
+            throw new BaseException(USERS_NOT_EXISTS);
+        } else {
+            UserRes.UserLoginRes userLoginRes = new UserRes.UserLoginRes(userOptional.get().getUserId());
+            return userLoginRes;
         }
     }
 }
