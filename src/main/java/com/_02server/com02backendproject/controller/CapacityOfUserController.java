@@ -24,10 +24,10 @@ public class CapacityOfUserController {
 
     // 사용자의 기기 추가
     @PostMapping(value = "/add")
-    public BaseResponse<Void> deviceOfUserAdd(
-            @Validated @RequestBody DeviceReq.DeviceOfUserAddReq deviceOfUserReq)
+    public BaseResponse<Void> capacityOfUserAdd(
+            @Validated @RequestBody DeviceReq.CapacityOfUserAddReq capacityOfUserAddReq)
             throws BaseException, IOException{
-        capacityOfUserService.deviceOfUserAdd(deviceOfUserReq);
+        capacityOfUserService.capacityOfUserAdd(capacityOfUserAddReq);
         return new BaseResponse<>(SUCCESS);
     }
 }

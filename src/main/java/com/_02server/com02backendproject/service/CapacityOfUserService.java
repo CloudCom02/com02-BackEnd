@@ -20,18 +20,18 @@ public class CapacityOfUserService {
     private final CapacityOfUserRepository capacityOfUserRepository;
 
 
-    public void deviceOfUserAdd(DeviceReq.DeviceOfUserAddReq deviceOfUserAddReq)
+    public void capacityOfUserAdd(DeviceReq.CapacityOfUserAddReq capacityOfUserAddReq)
         throws BaseException, IOException{
 
-        if(deviceOfUserAddReq == null) {
+        if(capacityOfUserAddReq == null) {
             throw new BaseException(EMPTY_INFORMATION);
         } else{
             CapacityOfUser capacityOfUser = CapacityOfUser.builder()
-                    .userCapacityId(deviceOfUserAddReq.getUserCapacityId())
-                    .user(deviceOfUserAddReq.getUser())
-                    .nowCapacity(deviceOfUserAddReq.getNowCapacity())
-                    .averageDays(deviceOfUserAddReq.getAverageDays())
-                    .parentDevice(deviceOfUserAddReq.getParentDevice())
+                    .userCapacityId(capacityOfUserAddReq.getUserCapacityId())
+                    .user(capacityOfUserAddReq.getUser())
+                    .nowCapacity(capacityOfUserAddReq.getNowCapacity())
+                    .averageDays(capacityOfUserAddReq.getAverageDays())
+                    .parentDevice(capacityOfUserAddReq.getParentDevice())
                     .build();
 
             capacityOfUserRepository.save(capacityOfUser);

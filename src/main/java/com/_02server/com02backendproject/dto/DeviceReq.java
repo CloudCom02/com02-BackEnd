@@ -10,7 +10,7 @@ public class DeviceReq {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class DeviceOfUserAddReq{
+    public static class CapacityOfUserAddReq{
         Long userCapacityId;
         User user;
         Double nowCapacity;
