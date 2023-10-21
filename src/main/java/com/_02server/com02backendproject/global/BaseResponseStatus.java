@@ -21,8 +21,8 @@ public enum BaseResponseStatus {
     RTK_INCORRECT(false, 2004, "Refresh Token 값을 확인해주세요."),
 
     USERS_NOT_FOUND_EMAIL(true,2010,"가입 가능한 이메일입니다."),
-    USERS_EXISTS_EMAIL(false,2011,"이미 존재하는 메일 주소입니다.");
-
+    USERS_EXISTS_EMAIL(false,2011,"이미 존재하는 메일 주소입니다."),
+    EMPTY_INFORMATION(false, 2050, "값이 존재하지 않습니다.");
 
     private final boolean isSuccess;
     private final int code;
