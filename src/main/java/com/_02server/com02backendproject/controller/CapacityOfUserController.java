@@ -6,10 +6,7 @@ import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.CapacityOfUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -28,6 +25,15 @@ public class CapacityOfUserController {
             @Validated @RequestBody DeviceReq.CapacityOfUserAddReq capacityOfUserAddReq)
             throws BaseException, IOException{
         capacityOfUserService.capacityOfUserAdd(capacityOfUserAddReq);
+        return new BaseResponse<>(SUCCESS);
+    }
+
+    // 사용자의 기기에서 삭제
+    @PutMapping(value = "/delete")
+    public BaseResponse<Void> capacityOfUserDelete(
+            @RequestBody DeviceReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
+        throws BaseException, IOException{
+        capacityOfUserService.capacityOfUserDelete(capacityOfUserDeleteReq);
         return new BaseResponse<>(SUCCESS);
     }
 }

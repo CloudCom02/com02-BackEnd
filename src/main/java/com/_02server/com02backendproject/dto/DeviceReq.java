@@ -17,4 +17,12 @@ public class DeviceReq {
         Double averageDays;
         Device parentDevice;
     }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    public static class CapacityOfUserDeleteReq{
+        Long userCapacityId;
+    }
 }
