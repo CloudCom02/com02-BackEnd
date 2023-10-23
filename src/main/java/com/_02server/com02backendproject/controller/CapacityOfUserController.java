@@ -20,20 +20,28 @@ public class CapacityOfUserController {
     private final CapacityOfUserService capacityOfUserService;
 
     // 사용자의 기기 추가
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/{userId}/add")
     public BaseResponse<Void> capacityOfUserAdd(
-            @Validated @RequestBody DeviceReq.CapacityOfUserAddReq capacityOfUserAddReq)
+            @PathVariable("userId") Long userId, @Validated @RequestBody DeviceReq.CapacityOfUserReq capacityOfUserReq)
             throws BaseException, IOException{
-        capacityOfUserService.capacityOfUserAdd(capacityOfUserAddReq);
+        capacityOfUserService.capacityOfUserAdd(capacityOfUserReq);
         return new BaseResponse<>(SUCCESS);
     }
 
     // 사용자의 기기에서 삭제
-    @PutMapping(value = "/delete")
+    @PutMapping(value = "/{userId}/delete")
     public BaseResponse<Void> capacityOfUserDelete(
-            @RequestBody DeviceReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
+            @PathVariable("userId") Long userId, @RequestParam Long capacityOfUserId)
         throws BaseException, IOException{
-        capacityOfUserService.capacityOfUserDelete(capacityOfUserDeleteReq);
+        capacityOfUserService.capacityOfUserDelete(capacityOfUserId);
+        return new BaseResponse<>(SUCCESS);
+    }
+
+    @PutMapping(value = "/update")
+    public BaseResponse<Void> capacityOfUserEdit(
+            @RequestBody DeviceReq.CapacityOfUserUpdateReq capacityOfUserEditReq)
+        throws BaseException, IOException {
+        capacityOfUserService.capacityOfUserEdit(capacityOfUserEditReq);
         return new BaseResponse<>(SUCCESS);
     }
 }

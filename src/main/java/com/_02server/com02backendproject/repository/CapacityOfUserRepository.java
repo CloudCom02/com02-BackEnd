@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CapacityOfUserRepository extends JpaRepository<CapacityOfUser, Long> {
     Optional<CapacityOfUser> findByUserCapacityId(Long userCapacityId);
-
     void deleteByUserCapacityId(Long userCapacityId);
 }

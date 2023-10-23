@@ -22,18 +22,18 @@ public class CapacityOfUserService {
     private final CapacityOfUserRepository capacityOfUserRepository;
 
 
-    public void capacityOfUserAdd(DeviceReq.CapacityOfUserAddReq capacityOfUserAddReq)
+    public void capacityOfUserAdd(DeviceReq.CapacityOfUserReq capacityOfUserReq)
         throws BaseException, IOException{
 
-        if(capacityOfUserAddReq == null) {
+        if(capacityOfUserReq == null) {
             throw new BaseException(EMPTY_INFORMATION);
         } else{
             CapacityOfUser capacityOfUser = CapacityOfUser.builder()
-                    .userCapacityId(capacityOfUserAddReq.getUserCapacityId())
-                    .user(capacityOfUserAddReq.getUser())
-                    .nowCapacity(capacityOfUserAddReq.getNowCapacity())
-                    .averageDays(capacityOfUserAddReq.getAverageDays())
-                    .parentDevice(capacityOfUserAddReq.getParentDevice())
+                    .userCapacityId(capacityOfUserReq.getUserCapacityId())
+                    .user(capacityOfUserReq.getUser())
+                    .nowCapacity(capacityOfUserReq.getNowCapacity())
+                    .averageDays(capacityOfUserReq.getAverageDays())
+                    .parentDevice(capacityOfUserReq.getParentDevice())
                     .build();
 
             capacityOfUserRepository.save(capacityOfUser);
@@ -41,17 +41,34 @@ public class CapacityOfUserService {
     }
 
     @Transactional
-    public void capacityOfUserDelete(DeviceReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
+    public void capacityOfUserDelete(Long capacityOfUserId)
         throws BaseException, IOException{
-        if(capacityOfUserDeleteReq == null) throw new BaseException(EMPTY_INFORMATION);
+        if(capacityOfUserId == null) throw new BaseException(EMPTY_INFORMATION);
 
         Optional<CapacityOfUser> capacityOfUserOptional
-                = capacityOfUserRepository.findByUserCapacityId(capacityOfUserDeleteReq.getUserCapacityId());
+                = capacityOfUserRepository.findByUserCapacityId(capacityOfUserId);
 
         if (capacityOfUserOptional.isEmpty()){
             throw new BaseException(CANNOT_FIND_INFORMATION);
         } else {
-            capacityOfUserRepository.deleteByUserCapacityId(capacityOfUserDeleteReq.getUserCapacityId());
+            capacityOfUserRepository.deleteByUserCapacityId(capacityOfUserId);
+        }
+    }
+
+    // 더티 체킹
+    @Transactional
+    public void capacityOfUserEdit(DeviceReq.CapacityOfUserUpdateReq capacityOfUserReq)
+        throws BaseException, IOException{
+        if(capacityOfUserReq == null) throw new BaseException(EMPTY_INFORMATION);
+
+        Optional<CapacityOfUser> capacityOfUserOptional
+                 = capacityOfUserRepository.findByUserCapacityId(capacityOfUserReq.getUserCapacityId());
+
+        if(capacityOfUserOptional.isEmpty()){
+            throw new BaseException(CANNOT_FIND_INFORMATION);
+        } else {
+            capacityOfUserOptional.get().setNowCapacity(capacityOfUserReq.getNowCapacity());
+            capacityOfUserOptional.get().setAverageDays(capacityOfUserReq.getAverageDays());
         }
     }
 }

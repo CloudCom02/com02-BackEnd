@@ -3,6 +3,7 @@ package com._02server.com02backendproject.dto;
 import com._02server.com02backendproject.entities.Device;
 import com._02server.com02backendproject.entities.User;
 import lombok.*;
+import org.checkerframework.checker.units.qual.A;
 
 public class DeviceReq {
 
@@ -10,7 +11,7 @@ public class DeviceReq {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class CapacityOfUserAddReq{
+    public static class CapacityOfUserReq{
         Long userCapacityId;
         User user;
         Double nowCapacity;
@@ -22,7 +23,10 @@ public class DeviceReq {
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
-    public static class CapacityOfUserDeleteReq{
+    @Setter
+    public static class CapacityOfUserUpdateReq{
         Long userCapacityId;
+        Double nowCapacity;
+        Double averageDays;
     }
 }
