@@ -1,6 +1,7 @@
 package com._02server.com02backendproject.controller;
 
 import com._02server.com02backendproject.dto.DeviceReq;
+import com._02server.com02backendproject.dto.CapacityOfUserRes;
 import com._02server.com02backendproject.global.BaseException;
 import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.CapacityOfUserService;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com._02server.com02backendproject.global.BaseResponseStatus.SUCCESS;
 
@@ -20,28 +22,47 @@ public class CapacityOfUserController {
     private final CapacityOfUserService capacityOfUserService;
 
     // 사용자의 기기 추가
-    @PostMapping(value = "/{userId}/add")
+    @PostMapping(value = "/add")
     public BaseResponse<Void> capacityOfUserAdd(
-            @PathVariable("userId") Long userId, @Validated @RequestBody DeviceReq.CapacityOfUserReq capacityOfUserReq)
+            @Validated @RequestBody DeviceReq.CapacityOfUserReq capacityOfUserReq)
             throws BaseException, IOException{
         capacityOfUserService.capacityOfUserAdd(capacityOfUserReq);
         return new BaseResponse<>(SUCCESS);
     }
 
     // 사용자의 기기에서 삭제
-    @PutMapping(value = "/{userId}/delete")
+    @PutMapping(value = "/delete")
     public BaseResponse<Void> capacityOfUserDelete(
-            @PathVariable("userId") Long userId, @RequestParam Long capacityOfUserId)
+            @RequestBody DeviceReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
         throws BaseException, IOException{
-        capacityOfUserService.capacityOfUserDelete(capacityOfUserId);
+        capacityOfUserService.capacityOfUserDelete(capacityOfUserDeleteReq);
         return new BaseResponse<>(SUCCESS);
     }
 
+    // 사용자의 기기 수정
     @PutMapping(value = "/update")
     public BaseResponse<Void> capacityOfUserEdit(
             @RequestBody DeviceReq.CapacityOfUserUpdateReq capacityOfUserEditReq)
         throws BaseException, IOException {
         capacityOfUserService.capacityOfUserEdit(capacityOfUserEditReq);
         return new BaseResponse<>(SUCCESS);
+    }
+
+    // 사용자 기기의 현재 배터리 정보만 수정
+    @PutMapping(value = "/batteryLevel")
+    public BaseResponse<Void> batteryLevelUpdate(
+           @RequestBody DeviceReq.BatteryLevelReq batteryLevelReq)
+        throws BaseException, IOException{
+        capacityOfUserService.BatteryLevelUpdate(batteryLevelReq);
+        return new BaseResponse<>(SUCCESS);
+    }
+
+    // 사용자의 기기 리스트 읽어오기
+    @GetMapping(value = "/list/{userId}")
+    public BaseResponse<List<CapacityOfUserRes>> capacityOfUserRead(
+          @PathVariable("userId") Long userId)
+        throws BaseException, IOException{
+        List<CapacityOfUserRes> capacityOfUserRes = capacityOfUserService.capacityOfUserRead(userId);
+        return new BaseResponse<>(capacityOfUserRes);
     }
 }
