@@ -36,4 +36,14 @@ public class UserController {
         UserRes.UserLoginRes userLoginRes = userService.login(userLoginReq);
         return new BaseResponse<>(userLoginRes);
     }
+
+    //회원 정보 조회
+    @GetMapping(value = "/info")
+    public BaseResponse<UserRes.UserInfoCheckRes> info(
+            @RequestBody UserReq.UserInfoCheckReq userInfoCheckReq
+
+    ) throws BaseException, IOException {
+        UserRes.UserInfoCheckRes userInfoCheckRes = userService.info(userInfoCheckReq);
+        return new BaseResponse<>(userInfoCheckRes);
+    }
 }

@@ -24,4 +24,12 @@ public class UserReq {
         String email;
         String password;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserInfoCheckReq { // 회원 정보 조회 요청
+        Long userIdx;
+    }
 }

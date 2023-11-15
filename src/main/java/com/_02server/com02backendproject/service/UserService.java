@@ -49,4 +49,16 @@ public class UserService {
             return userLoginRes;
         }
     }
+
+    public UserRes.UserInfoCheckRes info(UserReq.UserInfoCheckReq userInfoCheckReq) throws BaseException, IOException {
+
+        Optional<User> userOptional = userRepository.findByUserId(userInfoCheckReq.getUserIdx());
+
+        if(userOptional.isEmpty()) {
+            throw new BaseException(USERS_NOT_EXISTS);
+        } else {
+            UserRes.UserInfoCheckRes userInfoCheckRes = new UserRes.UserInfoCheckRes(userOptional.get().getEmail());
+            return userInfoCheckRes;
+        }
+    }
 }
