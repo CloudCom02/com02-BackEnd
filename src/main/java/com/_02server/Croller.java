@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.*;
+
+//initialize &
 public class Croller {
     public static void main(String[] args) {
         // CSV 파일 경로
@@ -61,6 +63,11 @@ public class Croller {
         return parsed;
     }
 
+    private static void saveDataToDB(String name, String contents) {
+        //db에 어케 연결하는지 혹시 db도 동적 연결하면서 찾아야하는지
+        //contents파싱 코드 여기에
+    }
+
     private static void saveDataToCSV(String name, String contents, String filePath) {
         try (Writer writer = new FileWriter(filePath, true)) {
             List<String[]> data = new ArrayList<>();
@@ -78,25 +85,5 @@ public class Croller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-}
-
-enum CategoryNumber {
-    보조배터리(20322920),
-    무선이어폰(12237349),
-    무선헤드폰(12237350),
-    미러리스카메라(12237505),
-    DSLR카메라(12237506),
-    하이엔드카메라(12237507),
-    액션캠코더(12237508);
-
-    int cate;
-    CategoryNumber(int i) {
-        this.cate = i;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }
