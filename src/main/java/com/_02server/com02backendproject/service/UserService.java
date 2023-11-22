@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -120,5 +121,15 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    @Transactional
+    public void changePassword(String email, String password) throws BaseException {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isEmpty()) {
+            throw new BaseException(USERS_NOT_EXISTS);
+        }
+        User user = userOptional.get();
+        user.setPassword(password);
     }
 }

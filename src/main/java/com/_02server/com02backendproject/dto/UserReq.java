@@ -50,4 +50,14 @@ public class UserReq {
     public static class UserEmailDupCheckReq { // 이메일 중복 확인
         String email;
     }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserPasswordChangeReq { // 비밀번호 변경
+        String email;
+        String password;
+    }
 }

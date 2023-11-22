@@ -41,7 +41,7 @@ public class UserController {
 
     // 이메일 전송
     @PostMapping("/emails/verification-requests")
-    public BaseResponse<Void> sendMessage(UserReq.UserSendEmailReq userSendEmailReq, HttpServletRequest request) throws BaseException {
+    public BaseResponse<Void> sendMessage(@RequestBody UserReq.UserSendEmailReq userSendEmailReq, HttpServletRequest request) throws BaseException {
         String code = userService.sendCodeToEmail(userSendEmailReq.getEmail(), userSendEmailReq.getIsForJoin());
 
         HttpSession session = request.getSession();
@@ -53,7 +53,7 @@ public class UserController {
 
     // 이메일 인증
     @GetMapping("/emails/verifications")
-    public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq, HttpServletRequest request) throws BaseException {
+    public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(@RequestBody UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq, HttpServletRequest request) throws BaseException {
         Boolean isCorrected = userService.verifiedCode(userEmailCodeCheckReq.getEmail(), userEmailCodeCheckReq.getCode(), request);
         UserRes.UserEmailCodeCheckRes res = new UserRes.UserEmailCodeCheckRes(isCorrected);
         return new BaseResponse<>(res);
@@ -61,10 +61,16 @@ public class UserController {
 
     // 이메일 중복 확인
     @GetMapping("/check-email")
-    public BaseResponse<UserRes.UserEmailDupCheckRes> checkDupEmail(UserReq.UserEmailDupCheckReq userEmailDupCheckReq) throws BaseException {
+    public BaseResponse<UserRes.UserEmailDupCheckRes> checkDupEmail(@RequestBody UserReq.UserEmailDupCheckReq userEmailDupCheckReq) throws BaseException {
         Boolean emailExists = userService.checkDupEmail(userEmailDupCheckReq.getEmail());
         UserRes.UserEmailDupCheckRes res = new UserRes.UserEmailDupCheckRes(emailExists);
         return new BaseResponse<>(res);
     }
 
+    // 비밀번호 변경
+    @PatchMapping("/password")
+    public BaseResponse<Void> changePassword(@RequestBody UserReq.UserPasswordChangeReq userPasswordChangeReq) throws BaseException {
+        userService.changePassword(userPasswordChangeReq.getEmail(), userPasswordChangeReq.getPassword());
+        return new BaseResponse<>(SUCCESS);
+    }
 }
