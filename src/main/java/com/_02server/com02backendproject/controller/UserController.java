@@ -41,10 +41,11 @@ public class UserController {
 
     // 이메일 전송
     @PostMapping("/emails/verification-requests")
-    public BaseResponse<Void> sendMessage(@RequestParam("email") String email, @RequestParam("isForJoin") Boolean isForJoin, HttpServletRequest request) throws BaseException {
-        String code = userService.sendCodeToEmail(email, isForJoin);
+    public BaseResponse<Void> sendMessage(UserReq.UserSendEmailReq userSendEmailReq, HttpServletRequest request) throws BaseException {
+        String code = userService.sendCodeToEmail(userSendEmailReq.getEmail(), userSendEmailReq.getIsForJoin());
 
         HttpSession session = request.getSession();
+        session.setAttribute("email", userSendEmailReq.getEmail());
         session.setAttribute("code", code);
 
         return new BaseResponse<>(SUCCESS);
@@ -52,10 +53,18 @@ public class UserController {
 
     // 이메일 인증
     @GetMapping("/emails/verifications")
-    public BaseResponse<String> verificationEmail(@RequestParam("email") String email,
-                                            @RequestParam("code") String authCode, HttpServletRequest request) throws BaseException {
-        String result = userService.verifiedCode(email, authCode, request);
-
-        return new BaseResponse<>(result);
+    public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq, HttpServletRequest request) throws BaseException {
+        Boolean isCorrected = userService.verifiedCode(userEmailCodeCheckReq.getEmail(), userEmailCodeCheckReq.getCode(), request);
+        UserRes.UserEmailCodeCheckRes res = new UserRes.UserEmailCodeCheckRes(isCorrected);
+        return new BaseResponse<>(res);
     }
+
+    // 이메일 중복 확인
+    @GetMapping("/check-email")
+    public BaseResponse<UserRes.UserEmailDupCheckRes> checkDupEmail(UserReq.UserEmailDupCheckReq userEmailDupCheckReq) throws BaseException {
+        Boolean emailExists = userService.checkDupEmail(userEmailDupCheckReq.getEmail());
+        UserRes.UserEmailDupCheckRes res = new UserRes.UserEmailDupCheckRes(emailExists);
+        return new BaseResponse<>(res);
+    }
+
 }

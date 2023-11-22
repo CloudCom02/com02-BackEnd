@@ -97,13 +97,14 @@ public class UserService {
         }
     }
 
-    public String verifiedCode(String email, String authCode, HttpServletRequest request) throws BaseException {
-        this.checkDuplicatedEmail(email, true);
-
+    public Boolean verifiedCode(String email, String authCode, HttpServletRequest request) throws BaseException {
         String correctCode = request.getSession().getAttribute("code").toString();
+        String correctEmail = request.getSession().getAttribute("email").toString();
 
-        if (correctCode.equals(authCode)) {
-            return "일치합니다";
+        if (correctCode.equals(authCode) && correctEmail.equals(email)) {
+            return true;
+        } else if (!email.equals(correctEmail)) {
+            throw new BaseException(INCORRECT_EMAIL);
         } else {
             throw new BaseException(INCORRECT_CODE);
         }
@@ -111,5 +112,13 @@ public class UserService {
 //        String redisAuthCode = redisService.getValues(AUTH_CODE_PREFIX + email);
 //        boolean authResult = redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
 //        return EmailVerificationResult.of(authResult);
+    }
+
+    public Boolean checkDupEmail(String email) throws BaseException {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }
