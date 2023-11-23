@@ -46,4 +46,13 @@ public class UserController {
         UserRes.UserInfoCheckRes userInfoCheckRes = userService.info(userInfoCheckReq);
         return new BaseResponse<>(userInfoCheckRes);
     }
+
+    //회원 탈퇴
+    @DeleteMapping(value = "/delete")
+    public BaseResponse<Void> delete(
+            @RequestBody UserReq.UserDeleteReq userDeleteReq
+    ) throws BaseException, IOException {
+        userService.delete(userDeleteReq);
+        return new BaseResponse<>(SUCCESS);
+    }
 }

@@ -2,6 +2,8 @@ package com._02server.com02backendproject.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter
@@ -24,7 +26,9 @@ public class CapacityOfUser {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user; // 사용자 ID
+
 
     // 부모 정의
     @ManyToOne(fetch = FetchType.LAZY)

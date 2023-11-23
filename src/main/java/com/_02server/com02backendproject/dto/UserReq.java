@@ -32,4 +32,12 @@ public class UserReq {
     public static class UserInfoCheckReq { // 회원 정보 조회 요청
         Long userIdx;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserDeleteReq { // 회원 탈퇴 요청
+        Long userIdx;
+    }
 }

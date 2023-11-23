@@ -1,6 +1,7 @@
 package com._02server.com02backendproject.service;
 
 import com._02server.com02backendproject.dto.UserRes;
+import com._02server.com02backendproject.repository.CapacityOfUserRepository;
 import com._02server.com02backendproject.repository.UserRepository;
 import com._02server.com02backendproject.dto.UserReq;
 import com._02server.com02backendproject.entities.User;
@@ -8,6 +9,7 @@ import com._02server.com02backendproject.global.BaseException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -21,6 +23,7 @@ import static com._02server.com02backendproject.global.BaseResponseStatus.USERS_
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CapacityOfUserRepository capacityOfUserRepository;
 
     public void join(UserReq.UserJoinReq userJoinReq) throws BaseException, IOException {
 
@@ -59,6 +62,17 @@ public class UserService {
         } else {
             UserRes.UserInfoCheckRes userInfoCheckRes = new UserRes.UserInfoCheckRes(userOptional.get().getEmail());
             return userInfoCheckRes;
+        }
+    }
+
+    @Transactional
+    public void delete(UserReq.UserDeleteReq userDeleteReq) throws BaseException, IOException {
+        Optional<User> userOptional = userRepository.findByUserId(userDeleteReq.getUserIdx());
+
+        if(userOptional.isEmpty()){
+            throw new BaseException(USERS_NOT_EXISTS);
+        } else {
+            userRepository.deleteById(userOptional.get().getUserId());
         }
     }
 }

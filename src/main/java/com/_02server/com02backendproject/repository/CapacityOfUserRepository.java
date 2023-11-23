@@ -1,7 +1,11 @@
 package com._02server.com02backendproject.repository;
 
 import com._02server.com02backendproject.entities.CapacityOfUser;
+import com._02server.com02backendproject.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
