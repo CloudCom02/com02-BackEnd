@@ -19,6 +19,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/")
+    public String getHello() {
+        return "Hello";
+    }
+
     // 회원 가입
     @PostMapping(value = "/join")
     public BaseResponse<Void> join(
