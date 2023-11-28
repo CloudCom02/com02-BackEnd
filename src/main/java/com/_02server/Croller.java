@@ -21,7 +21,7 @@ public class Croller {
 
         WebDriver driver = new ChromeDriver(options);
 
-        String cate = Integer.toString(CategoryNumber.무선이어폰.cate); //여기를 바꿔서
+        String cate = Integer.toString(Category.무선이어폰.cate); //여기를 바꿔서
 
         driver.get("https://prod.danawa.com/list/?cate="+cate);
         for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)

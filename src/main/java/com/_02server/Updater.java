@@ -20,36 +20,21 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.*;
 import java.util.*;
 
-import static com._02server.CategoryNumber.*;
+import static com._02server.Category.*;
 
 public class Updater {
-    public Updater(CategoryNumber categoryNumber) {
+    public Updater(Category category) {
         HashSet<String> crolledSet = new HashSet<>();
-        HashSet<String> prevSavedSet = new HashSet<>();
-        String tmpCsvPath = "output-subBattery.csv";
-        //접근하기
-        File dataFile = new File(tmpCsvPath);
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-            String str;
-            while((str = reader.readLine()) != null) {
-                int lastOfName = str.indexOf((int)'※');
-                str = str.substring(0,lastOfName-1);
-                prevSavedSet.add(str);
-            }
 
-        }catch(FileNotFoundException fileNotFoundException) {
-            System.out.println("파일 없음???");
-        } catch (IOException e) {
-            System.out.println("내용이없네???");
-        }
+        String tmpCsvPath = "output-subBattery.csv";
+        HashSet<String> prevSavedSet = loadNameListFile(tmpCsvPath);
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
 
         WebDriver driver = new ChromeDriver(options);
 
-        String cate = Integer.toString(categoryNumber.cate); //여기를 바꿔서
+        String cate = Integer.toString(category.cate); //여기를 바꿔서
 
         driver.get("https://prod.danawa.com/list/?cate="+cate);
         for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
@@ -58,13 +43,37 @@ public class Updater {
             executor.executeScript(String.format("movePage(%d)", i));
         }
 
-        DataChecker(categoryNumber,crolledSet,prevSavedSet);
+        int success = DataChecker(category,crolledSet,prevSavedSet);
+        System.out.printf("성공한 업데이트 %d건, 프로그램 종료합니다.\n",success);
 
     }
+
+    private HashSet<String> loadNameListFile(String tmpCsvPath) {
+        //접근하기
+        File dataFile = new File(tmpCsvPath);
+        HashSet<String> nameSet = new HashSet<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+            String str;
+            while((str = reader.readLine()) != null) {
+                int lastOfName = str.indexOf((int)'※');
+                str = str.substring(0,lastOfName-1);
+                nameSet.add(str);
+            }
+
+        }catch(FileNotFoundException fileNotFoundException) {
+            System.out.println("파일 없음???");
+        } catch (IOException e) {
+            System.out.println("내용이없네???");
+        }
+
+        return nameSet;
+    }
+
     //0일 시 업데이트 필요 없음
     //1 이상일 시 업데이트 함수 호출
     //-1일 시
-    public static int DataChecker(CategoryNumber categoryNumber, Set<String> crolledSet, Set<String> prevSavedSet) {
+    public static int DataChecker(Category category, Set<String> crolledSet, Set<String> prevSavedSet) {
         //여기부터 신상 판별기
         //별 문제 없이 둘이 똑같다면
         crolledSet.removeAll(prevSavedSet);
@@ -78,8 +87,7 @@ public class Updater {
             //이것도 removeAll prev-norel 연산을 통해서 밑return 0 혹은 return 자연수 하는 코드 필요.
             //if (crolledSet.removeAll(noRelevantSet))했는데 crolledSet.isEmpty()이면 return 0
             System.out.printf("%d 개의 업데이트가 필요합니다. 업데이트를 진행합니다.\n",crolledSet.size());
-            dataUpdate(crolledSet);
-            return crolledSet.size();
+            return dataUpdate(crolledSet,category);
         }
     }
     //살짝 아리까리 한부분은 리스트로 반환, 교환해도 되나...
@@ -93,27 +101,28 @@ public class Updater {
             }
 
         } catch(NoSuchElementException | StaleElementReferenceException noSuchElementException) {
-            System.out.println("이 페이지 끝\n");
         }
 
         return parsed;
     }
     //성공한 개수 반환
-    protected static int dataUpdate(Set<String> needUpdateSet) {
+    protected static int dataUpdate(Set<String> needUpdateSet, Category category) {
         Map<String,String> newDataMap = new HashMap<>();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        WebDriver driver = new ChromeDriver();//너무 많이 생성됨
+        WebDriver driver = new ChromeDriver(options);//너무 많이 생성됨
+        System.out.println("< "+category+" 업데이트 항목 >");
         for(String searchName : needUpdateSet) {
             newDataMap.putAll(parseOneProduct(searchName,driver));
         }
         newDataMap.forEach((k,v) -> System.out.println("name : "+k+" contents : "+v) );
-        int successUpdated = UpdateInDB(newDataMap);
+        int successUpdated = UpdateInDB(newDataMap,category);
         //newDataMap을 이용해서 데이터베이스에 업데이트하는 코드 입력(추상클래스로 상위에 넣을지... 고민중!)
         return successUpdated;
     }
 
-    private static int UpdateInDB(Map<String, String> newDataMap) {
+    private static int UpdateInDB(Map<String, String> newDataMap, Category category) {
+        FilterNMapper filterNMapper = new FilterNMapper(newDataMap,category);
         return 0;
     }
 
@@ -126,7 +135,6 @@ public class Updater {
             contents = contents.replaceAll("\\n", "");
 
             parsed.put(searchName, contents);
-            System.out.println(parsed.get(searchName));
             break;
         }
 
