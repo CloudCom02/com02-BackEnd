@@ -18,6 +18,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static com._02server.Category.*;
@@ -143,7 +145,20 @@ public class Updater {
     }
     //tester
     public static void main(String[] args) {
-        Updater updater = new Updater(보조배터리);
+        try {
+            BucketService bucketService = new BucketService();
+            for(int i=0; i<Category.values().length; i++) {
+                if(bucketService.load_bucket(Integer.toString(i))){
+                    Category c = Category.values()[i];
+                    Updater updater = new Updater(Category.values()[i]);
+                    bucketService.delete_bucket(Integer.toString(i));
+                    Files.createFile(Paths.get(Integer.toString(i+1)));
+                    bucketService.save_bucket(Integer.toString(i+1));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
 
     }
 }

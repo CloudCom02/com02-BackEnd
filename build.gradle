@@ -1,5 +1,22 @@
 plugins {
     id 'java'
+    id 'com.google.cloud.tools.jib' version '3.2.0'
+}
+
+jib {
+    from {
+        image = "openjdk:17-oracle"
+        platforms {
+            platform {
+                architecture = "amd64"
+                os = "linux"
+            }
+        }
+    }
+    to {
+        image = "shinyenggwak/crawl-updater"
+        tags = ["latest"]
+    }
 }
 
 group 'org.example'
@@ -8,6 +25,7 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.12.0'
