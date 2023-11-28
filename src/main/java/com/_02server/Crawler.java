@@ -1,0 +1,106 @@
+package com._02server;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.*;
+import com._02server.BucketService.*;
+
+//initialize &
+public class Crawler {
+    public static void crawlInformation(Category category) throws IOException {
+        // CSV 파일 경로
+        String csvFilePath = "output-"+category.eng+".csv";
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        String cate = Integer.toString(category.cate); //여기를 바꿔서
+        HashMap<String, String> nameConMap = new HashMap<>();
+        driver.get("https://prod.danawa.com/list/?cate="+cate);
+        for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
+
+            parseThisPage(driver,nameConMap);
+
+            Iterator<String> iter = nameConMap.keySet().iterator();
+            while (iter.hasNext()) {
+                String key = iter.next();
+                saveDataToCSV(key, nameConMap.get(key), csvFilePath); //한 페이지 파싱할 때마다 파일 저장
+            }
+
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript(String.format("movePage(%d)", i));
+        }
+
+        BucketService bucketService = new BucketService();
+        bucketService.save_bucket(csvFilePath);
+
+
+
+        driver.quit();
+    }
+    private static void parseThisPage(WebDriver driver,HashMap<String,String> parsed) {
+        WebElement prodInfo = driver.findElement(By.xpath("//div[@class='main_prodlist main_prodlist_list']"));
+        for (WebElement e : prodInfo.findElements(By.cssSelector("div.prod_main_info"))) {
+            try {
+                String name = e.findElement(By.cssSelector("p.prod_name a[name='productName']")).getText();
+                String contents = e.findElement(By.cssSelector("div.spec_list")).getText();
+                contents = contents.replaceAll("\\n","");
+
+                parsed.put(name,contents);
+
+                System.out.printf("상품 이름: %s\n내용: %s\n\n",name,contents);
+
+            } catch(NoSuchElementException noSuchElementException) {
+                //System.out.println("이 페이지 끝\n");
+            }catch (StaleElementReferenceException staleElementReferenceException) {
+                //System.out.println("이 페이지 끝\n");
+                break;
+            }
+        }
+    }
+
+    private static void saveDataToDB(String filePath) {
+        //db에 어케 연결하는지 혹시 db도 동적 연결하면서 찾아야하는지
+        //contents파싱 코드 여기에
+
+
+
+    }
+
+    private static void saveDataToCSV(String name, String contents, String filePath) {
+        try (Writer writer = new FileWriter(filePath, true)) {
+            List<String[]> data = new ArrayList<>();
+
+
+            // 데이터 행 추가
+            String[] row = {name, contents};
+            data.add(row);
+
+            for (String[] rowData : data) {
+                writer.write(String.join(" ※ ", rowData));
+            }
+            writer.write("\n");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        for(Category c : Category.values()) {
+            try {
+                crawlInformation(c);
+            } catch (IOException e) {
+                System.out.println("IOException");
+            }
+        }
+    }
+}
