@@ -1,6 +1,7 @@
 package com._02server.com02backendproject.service;
 
 import com._02server.com02backendproject.dto.UserRes;
+import com._02server.com02backendproject.repository.CapacityOfUserRepository;
 import com._02server.com02backendproject.repository.UserRepository;
 import com._02server.com02backendproject.dto.UserReq;
 import com._02server.com02backendproject.entities.User;
@@ -26,6 +27,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final MailService mailService;
+    private final CapacityOfUserRepository capacityOfUserRepository;
 
     public void join(UserReq.UserJoinReq userJoinReq) throws BaseException, IOException {
 
@@ -131,5 +133,28 @@ public class UserService {
         }
         User user = userOptional.get();
         user.setPassword(password);
+    }
+
+    public UserRes.UserInfoCheckRes info(UserReq.UserInfoCheckReq userInfoCheckReq) throws BaseException, IOException {
+
+        Optional<User> userOptional = userRepository.findByUserId(userInfoCheckReq.getUserIdx());
+
+        if(userOptional.isEmpty()) {
+            throw new BaseException(USERS_NOT_EXISTS);
+        } else {
+            UserRes.UserInfoCheckRes userInfoCheckRes = new UserRes.UserInfoCheckRes(userOptional.get().getEmail());
+            return userInfoCheckRes;
+        }
+    }
+
+    @Transactional
+    public void delete(UserReq.UserDeleteReq userDeleteReq) throws BaseException, IOException {
+        Optional<User> userOptional = userRepository.findByUserId(userDeleteReq.getUserIdx());
+
+        if(userOptional.isEmpty()){
+            throw new BaseException(USERS_NOT_EXISTS);
+        } else {
+            userRepository.deleteById(userOptional.get().getUserId());
+        }
     }
 }

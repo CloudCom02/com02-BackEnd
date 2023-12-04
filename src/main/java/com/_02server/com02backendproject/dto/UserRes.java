@@ -30,4 +30,8 @@ public class UserRes {
     public static class UserEmailDupCheckRes { // 이메일 중복 확인 response
         Boolean emailExists;
     }
+
+    public static class UserInfoCheckRes { // 회원 정보 조회 response
+        String email;
+    }
 }

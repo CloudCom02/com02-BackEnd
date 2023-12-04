@@ -13,8 +13,8 @@ public class DatabaseStatusController {
     private UserRepository userRepository;
     @GetMapping("/hello")
     public String hello(Model model) {
-        model.addAttribute("data", "hello!!");
-        return "hello.html";
+        model.addAttribute("data", "hello");
+        return "hello";
     }
     @GetMapping("/show-tables")
     public String showUsers(Model model) {

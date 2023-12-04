@@ -38,6 +38,14 @@ public class UserReq {
     @AllArgsConstructor
     @Getter
     @Setter
+    public static class UserInfoCheckReq { // 회원 정보 조회 요청
+        Long userIdx;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class UserEmailCodeCheckReq { // 인증 코드 검증 요청
         String email;
         String code;
@@ -59,5 +67,13 @@ public class UserReq {
     public static class UserPasswordChangeReq { // 비밀번호 변경
         String email;
         String password;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserDeleteReq { // 회원 탈퇴 요청
+        Long userIdx;
     }
 }
