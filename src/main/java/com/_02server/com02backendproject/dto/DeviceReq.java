@@ -1,5 +1,7 @@
 package com._02server.com02backendproject.dto;
 
+import com._02server.com02backendproject.entities.Device;
+import com._02server.com02backendproject.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,4 +15,44 @@ public class DeviceReq {
     public static class DeviceAddReq { //init할 때 param값 주기
         String category;
     }
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class CapacityOfUserReq{
+        Long userCapacityId;
+        User user;
+        Double nowCapacity;
+        Double averageDays;
+        Device parentDevice;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class CapacityOfUserDeleteReq{
+        Long userCapacityId;
+    }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class CapacityOfUserUpdateReq{
+        Long userCapacityId;
+        Double nowCapacity;
+        Double averageDays;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class BatteryLevelReq{
+        Long userCapacityId;
+        Double nowCapacity;
+    }
+
 }
