@@ -6,9 +6,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +30,11 @@ public class CrawlerService {
         // CSV 파일 경로
         String csvFilePath = "output-"+category.getEng()+".csv";
 
+        //사파리에서
+        //SafariOptions options = new SafariOptions();
+        //options.setCapability("headless", true);
+        //System.setProperty("webdriver.chrome.driver","/Users/shinyeonggwak/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-chromium-driver/4.8.3/f0ff2932d0ffdc49388eafa0c379f03d23496a29/selenium-chromium-driver-4.8.3.jar");
+        //크롬에서
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
 
