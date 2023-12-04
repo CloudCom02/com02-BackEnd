@@ -3,6 +3,7 @@ package com._02server;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileWriter;
@@ -11,24 +12,38 @@ import java.io.Writer;
 import java.util.*;
 import com._02server.BucketService.*;
 
+import static com._02server.SaveService.saveDataToCSV;
+import static com._02server.SaveService.saveDataToDB;
+
 //initialize &
 public class Crawler {
     public static void crawlInformation(Category category) throws IOException {
         // CSV 파일 경로
         String csvFilePath = "output-"+category.eng+".csv";
 
+        ChromeDriverService service = new ChromeDriverService.Builder().withLogOutput(System.out).build();
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
 
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver(service,options);
 
         String cate = Integer.toString(category.cate); //여기를 바꿔서
         HashMap<String, String> nameConMap = new HashMap<>();
         driver.get("https://prod.danawa.com/list/?cate="+cate);
+
+        List<Device> devices = new ArrayList<>();
         for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
 
             parseThisPage(driver,nameConMap);
+            //db에 들어갈 데이터로 포팅
+            FilterNMapper mapper = new FilterNMapper(nameConMap,category);
+            for (String key : nameConMap.keySet()) {
+                devices.add(mapper.mapping(key, nameConMap.get(key)));
+            }
 
+
+            //csv로 임시 로컬 저장하는 코드
             Iterator<String> iter = nameConMap.keySet().iterator();
             while (iter.hasNext()) {
                 String key = iter.next();
@@ -38,9 +53,10 @@ public class Crawler {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript(String.format("movePage(%d)", i));
         }
+        saveDataToDB(devices);
 
-        BucketService bucketService = new BucketService();
-        bucketService.save_bucket(csvFilePath);
+        //BucketService bucketService = new BucketService();
+        //bucketService.save_bucket(csvFilePath);
 
 
 
@@ -53,10 +69,9 @@ public class Crawler {
                 String name = e.findElement(By.cssSelector("p.prod_name a[name='productName']")).getText();
                 String contents = e.findElement(By.cssSelector("div.spec_list")).getText();
                 contents = contents.replaceAll("\\n","");
+                String imageURI = e.findElement(By.cssSelector("div.thumb_image")).findElement(By.cssSelector("img")).getAttribute("src");
+                parsed.put(name,contents+" ☆ "+imageURI);
 
-                parsed.put(name,contents);
-
-                System.out.printf("상품 이름: %s\n내용: %s\n\n",name,contents);
 
             } catch(NoSuchElementException noSuchElementException) {
                 //System.out.println("이 페이지 끝\n");
@@ -64,33 +79,6 @@ public class Crawler {
                 //System.out.println("이 페이지 끝\n");
                 break;
             }
-        }
-    }
-
-    private static void saveDataToDB(String filePath) {
-        //db에 어케 연결하는지 혹시 db도 동적 연결하면서 찾아야하는지
-        //contents파싱 코드 여기에
-
-
-
-    }
-
-    private static void saveDataToCSV(String name, String contents, String filePath) {
-        try (Writer writer = new FileWriter(filePath, true)) {
-            List<String[]> data = new ArrayList<>();
-
-
-            // 데이터 행 추가
-            String[] row = {name, contents};
-            data.add(row);
-
-            for (String[] rowData : data) {
-                writer.write(String.join(" ※ ", rowData));
-            }
-            writer.write("\n");
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
