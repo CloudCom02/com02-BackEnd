@@ -1,6 +1,5 @@
 package com._02server.com02backendproject.service;
 
-import com._02server.com02backendproject.dto.DeviceReq;
 import com._02server.com02backendproject.dto.CapacityOfUserRes;
 import com._02server.com02backendproject.entities.CapacityOfUser;
 import com._02server.com02backendproject.global.BaseException;
