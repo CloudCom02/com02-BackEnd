@@ -14,4 +14,12 @@ public class UserRes {
     public static class UserLoginRes { // 로그인 response
         Long userIdx;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserInfoCheckRes { // 회원 정보 조회 response
+        String email;
+    }
 }

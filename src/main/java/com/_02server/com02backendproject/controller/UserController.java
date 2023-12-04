@@ -19,6 +19,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/")
+    public String getHello() {
+        return "Hello";
+    }
+
     // 회원 가입
     @PostMapping(value = "/join")
     public BaseResponse<Void> join(
@@ -35,5 +40,24 @@ public class UserController {
     ) throws BaseException, IOException {
         UserRes.UserLoginRes userLoginRes = userService.login(userLoginReq);
         return new BaseResponse<>(userLoginRes);
+    }
+
+    //회원 정보 조회
+    @GetMapping(value = "/info")
+    public BaseResponse<UserRes.UserInfoCheckRes> info(
+            @RequestBody UserReq.UserInfoCheckReq userInfoCheckReq
+
+    ) throws BaseException, IOException {
+        UserRes.UserInfoCheckRes userInfoCheckRes = userService.info(userInfoCheckReq);
+        return new BaseResponse<>(userInfoCheckRes);
+    }
+
+    //회원 탈퇴
+    @DeleteMapping(value = "/delete")
+    public BaseResponse<Void> delete(
+            @RequestBody UserReq.UserDeleteReq userDeleteReq
+    ) throws BaseException, IOException {
+        userService.delete(userDeleteReq);
+        return new BaseResponse<>(SUCCESS);
     }
 }
