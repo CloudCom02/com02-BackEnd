@@ -142,8 +142,8 @@ public class Updater {
         //try catch 넣어야하는데 어떤 exception을 뱉는지 모름 -> 알게되면 catch해서 return 0 해주길
     }
     //tester
-    public static void main(String[] args) {
-        Updater updater = new Updater(보조배터리);
-
-    }
+//    public static void main(String[] args) {
+//        Updater updater = new Updater(보조배터리);
+//
+//    }
 }

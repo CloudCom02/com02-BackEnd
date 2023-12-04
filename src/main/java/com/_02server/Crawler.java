@@ -36,12 +36,6 @@ public class Crawler {
         for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
 
             parseThisPage(driver,nameConMap);
-            //db에 들어갈 데이터로 포팅
-            FilterNMapper mapper = new FilterNMapper(nameConMap,category);
-            for (String key : nameConMap.keySet()) {
-                devices.add(mapper.mapping(key, nameConMap.get(key)));
-            }
-
 
             //csv로 임시 로컬 저장하는 코드
             Iterator<String> iter = nameConMap.keySet().iterator();
@@ -52,6 +46,11 @@ public class Crawler {
 
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript(String.format("movePage(%d)", i));
+        }
+        //db에 들어갈 데이터로 포팅
+        FilterNMapper mapper = new FilterNMapper(nameConMap,category);
+        for (String key : nameConMap.keySet()) {
+            devices.add(mapper.mapping(key, nameConMap.get(key)));
         }
         saveDataToDB(devices);
 
@@ -83,12 +82,20 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        for(Category c : Category.values()) {
-            try {
-                crawlInformation(c);
-            } catch (IOException e) {
-                System.out.println("IOException");
+        if (args.length != 0) {
+            for(String s : args) {
+                for(Category c : Category.values()) {
+                    try {
+                        if(c.eng.equals(s)) {
+                            crawlInformation(c);
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
+        } else {
+            System.out.println("what category do you want to update?????");
         }
     }
 }

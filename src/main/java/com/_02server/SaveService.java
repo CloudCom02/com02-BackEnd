@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SaveService {
     static void saveDataToDB(List<Device> list) {
-        String DB_URL = "jdbc:mysql://0.0.0.0:3306/com02?serverTimezone=UTC";
+        String DB_URL = "jdbc:mysql://0.0.0.0:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
         String DB_USER = "root";
         String DB_PASSWORD = "Cloudcom02!";
 
@@ -23,9 +23,8 @@ public class SaveService {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             // Device 객체의 리스트를 반복하면서 데이터베이스에 삽입
-            for (Device device : list) {
-                insertDevice(connection, device);
-            }
+
+            insertDevice(connection, list);
 
             // 연결 종료
             connection.close();
@@ -54,21 +53,24 @@ public class SaveService {
         }
     }
 
-    private static void insertDevice(Connection connection, Device device) throws SQLException {
+    private static void insertDevice(Connection connection, List<Device> devices) throws SQLException {
         String insertQuery = "INSERT INTO device (device_name,category,maximum_output,wattPerhour,entire_capacity,imageURL) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            // 각 필드에 대한 값을 설정
-            preparedStatement.setString(1, device.getName());
-            preparedStatement.setString(2, device.getCategory());
-            preparedStatement.setDouble(3, device.getMaximum_output());
-            preparedStatement.setInt(4, device.getWattPerhour());
-            preparedStatement.setInt(5, device.getmAh());
-            preparedStatement.setString(6, device.getImageURL());
-            // ... 필요한 만큼 계속 설정
+            for(Device device : devices ) {
+                // 각 필드에 대한 값을 설정
+                preparedStatement.setString(1, device.getName());
+                preparedStatement.setString(2, device.getCategory());
+                preparedStatement.setDouble(3, device.getMaximum_output());
+                preparedStatement.setDouble(4, device.getWattPerhour());
+                preparedStatement.setInt(5, device.getmAh());
+                preparedStatement.setString(6, device.getImageURL());
+                // ... 필요한 만큼 계속 설정
 
-            // 쿼리 실행
-            preparedStatement.executeUpdate();
+                // 쿼리 실행
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
         }
     }
 }
