@@ -52,7 +52,7 @@ public class UserController {
     }
 
     // 이메일 인증
-    @GetMapping("/emails/verifications")
+    @PostMapping("/emails/verifications")
     public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(@RequestBody UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq, HttpServletRequest request) throws BaseException {
         Boolean isCorrected = userService.verifiedCode(userEmailCodeCheckReq.getEmail(), userEmailCodeCheckReq.getCode(), request);
         UserRes.UserEmailCodeCheckRes res = new UserRes.UserEmailCodeCheckRes(isCorrected);
@@ -61,8 +61,8 @@ public class UserController {
 
     // 이메일 중복 확인
     @GetMapping("/check-email")
-    public BaseResponse<UserRes.UserEmailDupCheckRes> checkDupEmail(@RequestBody UserReq.UserEmailDupCheckReq userEmailDupCheckReq) throws BaseException {
-        Boolean emailExists = userService.checkDupEmail(userEmailDupCheckReq.getEmail());
+    public BaseResponse<UserRes.UserEmailDupCheckRes> checkDupEmail(@RequestParam("email") String email) throws BaseException {
+        Boolean emailExists = userService.checkDupEmail(email);
         UserRes.UserEmailDupCheckRes res = new UserRes.UserEmailDupCheckRes(emailExists);
         return new BaseResponse<>(res);
     }
