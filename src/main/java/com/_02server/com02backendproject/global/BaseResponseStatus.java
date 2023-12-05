@@ -19,7 +19,6 @@ public enum BaseResponseStatus {
     INVALID_JWT(false, 2002, "유효하지 않은 JWT입니다."),
     INVALID_USER_JWT(false,2003,"권한이 없는 유저의 접근입니다."),
     RTK_INCORRECT(false, 2004, "Refresh Token 값을 확인해주세요."),
-
     USERS_NOT_FOUND_EMAIL(true,2010,"가입 가능한 이메일입니다."),
     USERS_EXISTS_EMAIL(false,2011,"이미 존재하는 메일 주소입니다."),
 
@@ -31,6 +30,7 @@ public enum BaseResponseStatus {
 
     EMPTY_INFORMATION(false, 2050, "요청값이 존재하지 않습니다."),
     CANNOT_FIND_INFORMATION(false, 2051, "해당 항목이 존재하지 않습니다."),
+    DEVICE_NOT_EXISTS(false,2052, "기기 정보가 존재하지 않습니다. 직접 등록을 진행해주세요."),
     ;
 
 

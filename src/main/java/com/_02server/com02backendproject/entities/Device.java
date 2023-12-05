@@ -19,19 +19,16 @@ public class Device {
     private Long parentId; // 부모 기기 id
 
     @Column(name = "device_name")
-    private String name; // 분류
+    private String deviceName; // 분류
 
     @Column(name = "entire_capacity")
     private Integer entireCapacity; // 배터리 용량
 
     @Column(name = "maximum_output")
-    private Double maximum_output;
+    private Double maximumOutput;
 
     @Column(name = "wattPerhour")
     private Integer wattPerhour; // 전력량
-
-    @Column(name = "mAh")
-    private Integer mAh;
 
     @Column(name = "category")
     private String category; // 분류
@@ -42,7 +39,7 @@ public class Device {
     @Column(name = "is_registered")
     private String isRegistered; // 직접 등록 여부
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
     private String contents;

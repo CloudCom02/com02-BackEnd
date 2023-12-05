@@ -12,13 +12,6 @@ public class DeviceReq {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class DeviceAddReq { //init할 때 param값 주기
-        String category;
-    }
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
     public static class CapacityOfUserReq{
         Long userCapacityId;
         User user;

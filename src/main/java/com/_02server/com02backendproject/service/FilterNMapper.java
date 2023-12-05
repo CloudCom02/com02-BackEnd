@@ -23,7 +23,7 @@ public class FilterNMapper {
     }
     public Device mapping(String name, String contents) {
         Device result = new Device();
-        result.setName(name);
+        result.setDeviceName(name);
         result.setCategory(category.toString());
 
         String[] conArray = contents.split("/");
@@ -35,7 +35,7 @@ public class FilterNMapper {
                 // 찾은 패턴에서 숫자 추출
                 while (matcher.find()) {
                     String match = matcher.group(1);
-                    result.setMAh(Integer.parseInt(match));
+                    result.setEntireCapacity(Integer.parseInt(match));
                 }
             }
 
@@ -47,7 +47,7 @@ public class FilterNMapper {
                 // 찾은 패턴에서 숫자 추출
                 while (matcher.find()) {
                     String match = matcher.group(1);
-                    result.setMaximum_output(Double.parseDouble(match));
+                    result.setMaximumOutput(Double.parseDouble(match));
                 }
             }
 
