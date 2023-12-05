@@ -36,12 +36,6 @@ public class Crawler {
         for(int i= 2; i<=100; i++) { //(페이지별 파싱 스크립트 통해)
 
             parseThisPage(driver,nameConMap);
-            //db에 들어갈 데이터로 포팅
-            FilterNMapper mapper = new FilterNMapper(nameConMap,category);
-            for (String key : nameConMap.keySet()) {
-                devices.add(mapper.mapping(key, nameConMap.get(key)));
-            }
-
 
             //csv로 임시 로컬 저장하는 코드
             Iterator<String> iter = nameConMap.keySet().iterator();
@@ -52,6 +46,11 @@ public class Crawler {
 
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript(String.format("movePage(%d)", i));
+        }
+        //db에 들어갈 데이터로 포팅
+        FilterNMapper mapper = new FilterNMapper(nameConMap,category);
+        for (String key : nameConMap.keySet()) {
+            devices.add(mapper.mapping(key, nameConMap.get(key)));
         }
         saveDataToDB(devices);
 

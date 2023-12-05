@@ -20,10 +20,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.*;
 import java.util.*;
 
-import static com._02server.Category.*;
+import static com._02server.SaveService.saveDataToCSV;
+import static com._02server.SaveService.saveDataToDB;
 
 public class Updater {
-    public Updater(Category category) {
+    public Updater() {}
+    public static void updateThisCategory(Category category) {
         HashSet<String> crolledSet = new HashSet<>();
 
         String tmpCsvPath = "output-subBattery.csv";
@@ -43,12 +45,12 @@ public class Updater {
             executor.executeScript(String.format("movePage(%d)", i));
         }
 
-        int success = DataChecker(category,crolledSet,prevSavedSet);
+        int success = dataCheck(category,crolledSet,prevSavedSet);
         System.out.printf("성공한 업데이트 %d건, 프로그램 종료합니다.\n",success);
 
     }
 
-    private HashSet<String> loadNameListFile(String tmpCsvPath) {
+    private static HashSet<String> loadNameListFile(String tmpCsvPath) {
         //접근하기
         File dataFile = new File(tmpCsvPath);
         HashSet<String> nameSet = new HashSet<>();
@@ -73,7 +75,7 @@ public class Updater {
     //0일 시 업데이트 필요 없음
     //1 이상일 시 업데이트 함수 호출
     //-1일 시
-    public static int DataChecker(Category category, Set<String> crolledSet, Set<String> prevSavedSet) {
+    public static int dataCheck(Category category, Set<String> crolledSet, Set<String> prevSavedSet) {
         //여기부터 신상 판별기
         //별 문제 없이 둘이 똑같다면
         crolledSet.removeAll(prevSavedSet);
@@ -112,18 +114,19 @@ public class Updater {
         options.addArguments("--headless");
         WebDriver driver = new ChromeDriver(options);//너무 많이 생성됨
         System.out.println("< "+category+" 업데이트 항목 >");
+        List<Device> devices = new ArrayList<>();
         for(String searchName : needUpdateSet) {
             newDataMap.putAll(parseOneProduct(searchName,driver));
         }
+        FilterNMapper mapper = new FilterNMapper(newDataMap,category);
+        for (String key : newDataMap.keySet()) {
+            devices.add(mapper.mapping(key, newDataMap.get(key)));
+        }
         newDataMap.forEach((k,v) -> System.out.println("name : "+k+" contents : "+v) );
-        int successUpdated = UpdateInDB(newDataMap,category);
-        //newDataMap을 이용해서 데이터베이스에 업데이트하는 코드 입력(추상클래스로 상위에 넣을지... 고민중!)
-        return successUpdated;
-    }
+        saveDataToDB(devices);
 
-    private static int UpdateInDB(Map<String, String> newDataMap, Category category) {
-        FilterNMapper filterNMapper = new FilterNMapper(newDataMap,category);
-        return 0;
+        //newDataMap을 이용해서 데이터베이스에 업데이트하는 코드 입력(추상클래스로 상위에 넣을지... 고민중!)
+        return devices.size();
     }
 
     private static Map<String,String> parseOneProduct(String searchName,WebDriver driver) throws NoSuchElementException, StaleElementReferenceException {
@@ -143,7 +146,22 @@ public class Updater {
     }
     //tester
     public static void main(String[] args) {
-        Updater updater = new Updater(보조배터리);
+        Category target = null;
+        if(args.length == 0 ) {
+            System.out.println("어떤 카테고리를 업데이트할 지 입력하세요");
+        } else {
+            for(String s : args) {
+                for(Category c : Category.values()) {
+                    if(s.equals(c.eng)) {
+                        target = c;
+                        updateThisCategory(target);
+                    }
+                }
+            }
+        }
+        if(target == null) {
+            System.out.println("해당 카테고리가 없어서 프로그램을 종료합니다");
+        }
 
     }
 }

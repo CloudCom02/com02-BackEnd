@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 public class FilterNMapper {
     public Map<String,String> datamap;
     public Category category;
-    static Pattern wattPattern = Pattern.compile("\\b(\\d+)W\\b");
-    static Pattern whPattern = Pattern.compile("\\b(\\d+)wh\\b");
-    static Pattern capacityPattern = Pattern.compile("\\b(\\d+)mah\\b");
+    static Pattern wattPattern = Pattern.compile("\\b(\\d*\\.?\\d+)W\\b");
+    static Pattern whPattern = Pattern.compile("\\b(\\d*\\.?\\d+)wh\\b");
+    static Pattern capacityPattern = Pattern.compile("\\b(\\d{1,3}(?:,\\d{3})*)(?:\\.\\d+)?mah\\b");
 
 
     public FilterNMapper(Map<String, String> newDataMap,Category category){
@@ -23,6 +23,9 @@ public class FilterNMapper {
         result.setName(name);
         result.setCategory(category.toString());
 
+        int urlstart = contents.indexOf("☆");
+        result.setImageURL(contents.substring(urlstart+1).trim());
+
         String[] conArray = contents.split("/");
         for(String s : conArray) {
 
@@ -32,7 +35,7 @@ public class FilterNMapper {
                 // 찾은 패턴에서 숫자 추출
                 while (matcher.find()) {
                     String match = matcher.group(1);
-                    result.setmAh(Integer.parseInt(match));
+                    result.setmAh(Integer.parseInt(match.replace(",","")));
                 }
             }
 
@@ -54,12 +57,8 @@ public class FilterNMapper {
                 // 찾은 패턴에서 숫자 추출
                 while (matcher.find()) {
                     String match = matcher.group(1);
-                    result.setWattPerhour(Integer.parseInt(match));
+                    result.setWattPerhour(Double.parseDouble(match));
                 }
-            }
-
-            if(s.contains("http")) {
-                result.setImageURL(s.trim());
             }
 
 
