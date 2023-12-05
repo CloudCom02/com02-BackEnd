@@ -42,8 +42,8 @@ public class Device {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
-    private String contents;
-    private double volt = 3.7;
+//    private String contents;
+//    private double volt = 3.7;
     //sy-gwak
 //    @OneToMany(mappedBy = "parentId")
 //    @Column(name = "subDevice")
