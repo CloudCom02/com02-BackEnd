@@ -14,9 +14,9 @@ import java.util.List;
 
 public class SaveService {
     static void saveDataToDB(List<Device> list) {
-        String DB_URL = "jdbc:mysql://0.0.0.0:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
+        String DB_URL = "jdbc:mysql://com02-sts-1.mysql-parktest.default.svc.cluster.local:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
         String DB_USER = "root";
-        String DB_PASSWORD = "Cloudcom02!";
+        String DB_PASSWORD = "qwerty";
 
         try {
             // 데이터베이스 연결

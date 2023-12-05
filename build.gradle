@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.google.cloud.tools.jib' version '3.2.0'
+    id 'org.springframework.boot' version '2.5.1'
 }
 
 jib {
@@ -17,6 +18,10 @@ jib {
         image = "shinyenggwak/crawler"
         tags = ["latest"]
     }
+}
+
+bootJar {
+    mainClass = 'com._02server.Crawler'
 }
 
 group 'org.example'

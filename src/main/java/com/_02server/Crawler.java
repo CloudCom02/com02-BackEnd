@@ -6,11 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.*;
-import com._02server.BucketService.*;
 
 import static com._02server.SaveService.saveDataToCSV;
 import static com._02server.SaveService.saveDataToDB;
