@@ -82,12 +82,20 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        for(Category c : Category.values()) {
-            try {
-                crawlInformation(c);
-            } catch (IOException e) {
-                System.out.println("IOException");
+        if (args.length != 0) {
+            for(String s : args) {
+                for(Category c : Category.values()) {
+                    try {
+                        if(c.eng.equals(s)) {
+                            crawlInformation(c);
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
+        } else {
+            System.out.println("what category do you want to update?????");
         }
     }
 }

@@ -64,7 +64,7 @@ public class FilterNMapper {
 
 
         }
-        result.setContents(contents.split("/"));
+        //result.setContents(contents);
 
         return result;
     }

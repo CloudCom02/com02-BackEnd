@@ -2,12 +2,12 @@ package com._02server;
 
 public class Device {
     public String name;
-    public String[] contents = new String[50];
+    //public String[] contents = new String[50];
     public String category;
     public double maximum_output; //최대 출력
     public double wattPerhour; // Wh 있다면 여기 채우기
     public int mAh; // mAh 있다면 여기 채우기
-    public double volt = 3.7; // 기본 전압량 설정함.
+    //public double volt = 3.7; // 기본 전압량 설정함.
     public String imageURL;
 
     public String getImageURL() {
@@ -18,13 +18,13 @@ public class Device {
         this.imageURL = imageURL;
     }
 
-    public double getVolt() {
-        return volt;
-    }
-
-    public void setVolt(double volt) {
-        this.volt = volt;
-    }
+//    public double getVolt() {
+//        return volt;
+//    }
+//
+//    public void setVolt(double volt) {
+//        this.volt = volt;
+//    }
 
     public String getName() {
         return name;
@@ -34,13 +34,13 @@ public class Device {
         this.name = name;
     }
 
-    public String[] getContents() {
-        return contents;
-    }
-
-    public void setContents(String[] contents) {
-        this.contents = contents;
-    }
+//    public String[] getContents() {
+//        return contents;
+//    }
+//
+//    public void setContents(String[] contents) {
+//        this.contents = contents;
+//    }
 
     public String getCategory() {
         return category;
