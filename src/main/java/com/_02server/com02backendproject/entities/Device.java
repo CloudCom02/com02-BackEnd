@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
-import java.util.List;
 
 @Entity
 @Getter
@@ -29,7 +28,7 @@ public class Device {
     private Double maximumOutput;
 
     @Column(name = "wattPerhour")
-    private Integer wattPerhour; // 전력량
+    private Double wattPerhour; // 전력량
 
     @Column(name = "category")
     private String category; // 분류
@@ -43,10 +42,10 @@ public class Device {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
-//    private String contents;
-//    private double volt = 3.7;
-//    //sy-gwak
+    //private String contents;
+    //private double volt = 3.7;
+    //sy-gwak
 //    @OneToMany(mappedBy = "parentId")
 //    @Column(name = "subDevice")
-//    private List<Device> subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
+//    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
 }
