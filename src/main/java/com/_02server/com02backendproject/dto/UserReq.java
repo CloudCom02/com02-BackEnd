@@ -24,4 +24,40 @@ public class UserReq {
         String email;
         String password;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserSendEmailReq { // 이메일 전송 요청
+        String email;
+        Boolean isForJoin;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserEmailCodeCheckReq { // 인증 코드 검증 요청
+        String email;
+        String code;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserEmailDupCheckReq { // 이메일 중복 확인
+        String email;
+    }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class UserPasswordChangeReq { // 비밀번호 변경
+        String email;
+        String password;
+    }
 }
