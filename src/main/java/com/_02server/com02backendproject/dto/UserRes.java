@@ -31,6 +31,10 @@ public class UserRes {
         Boolean emailExists;
     }
 
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class UserInfoCheckRes { // 회원 정보 조회 response
         String email;
     }

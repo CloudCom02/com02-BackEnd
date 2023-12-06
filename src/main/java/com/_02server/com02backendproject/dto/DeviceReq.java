@@ -2,10 +2,19 @@ package com._02server.com02backendproject.dto;
 
 import com._02server.com02backendproject.entities.Device;
 import com._02server.com02backendproject.entities.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class DeviceReq {
-
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class DeviceAddReq { //init할 때 param값 주기
+        String category;
+    }
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
@@ -45,4 +54,5 @@ public class DeviceReq {
         Long userCapacityId;
         Double nowCapacity;
     }
+
 }

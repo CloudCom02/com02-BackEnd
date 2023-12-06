@@ -10,9 +10,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.List;
 
 public class Scheduled {
+    public static String WEB_DRIVER_ID = "webdriver.chrome.driver";
+    public static String WEB_DRIVER_PATH = "src/main/java/com/_02server/com02backendproject/service/chromedriver";
     public static void main(String[] args) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
         WebDriver driver = new ChromeDriver(options);
 

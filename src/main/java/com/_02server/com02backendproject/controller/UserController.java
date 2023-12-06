@@ -76,6 +76,8 @@ public class UserController {
     @PatchMapping("/password")
     public BaseResponse<Void> changePassword(@RequestBody UserReq.UserPasswordChangeReq userPasswordChangeReq) throws BaseException {
         userService.changePassword(userPasswordChangeReq.getEmail(), userPasswordChangeReq.getPassword());
+        return new BaseResponse<>(SUCCESS);
+    }
 
     //회원 정보 조회
     @GetMapping(value = "/info")
