@@ -2,8 +2,7 @@ package com._02server.com02backendproject.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,7 +17,7 @@ public class Device {
     @Column(name="parent_id")
     private Long parentId; // 부모 기기 id
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", nullable = false)
     private String deviceName; // 분류
 
     @Column(name = "entire_capacity")
@@ -30,13 +29,13 @@ public class Device {
     @Column(name = "wattPerhour")
     private Double wattPerhour; // 전력량
 
-    @Column(name = "category")
+    @Column(name = "category",length = 10)
     private String category; // 분류
 
-    @Column(name = "imageURL")
+    @Column(name = "imageURL", length = 100)
     private String imageURL; // 이미지주소
 
-    @Column(name = "is_registered")
+    @Column(name = "is_registered",nullable = false, columnDefinition = "boolean default false")
     private String isRegistered; // 직접 등록 여부
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
@@ -47,5 +46,5 @@ public class Device {
     //sy-gwak
 //    @OneToMany(mappedBy = "parentId")
 //    @Column(name = "subDevice")
-//    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?
+//    private List<Device> subDevices; // 부속기기 // List<>로 담는 것이 나은건지?
 }

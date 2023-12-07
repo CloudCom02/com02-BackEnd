@@ -2,6 +2,22 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.1.3'
+    id 'com.google.cloud.tools.jib' version '3.2.0'
+}
+
+jib {
+    from {
+        image = "openjdk:17-oracle"
+        platforms {
+            platform {
+                architecture = "amd64"
+                os = "linux"            }
+        }
+    }
+    to {
+        image = "shinyenggwak/onlydevice"
+        tags = ["latest"]
+    }
 }
 
 group = 'com._02server'
@@ -22,25 +38,16 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.8.1'
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'mysql:mysql-connector-java:8.0.31'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'javax.mail:javax.mail-api:1.6.2'
-    implementation 'org.springframework.boot:spring-boot-starter-mail:3.0.5'
-    implementation 'org.springframework:spring-context:6.0.7'
-    implementation 'org.springframework:spring-context-support:6.0.7'
-    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+    implementation 'com.mysql:mysql-connector-j:8.0.31'
 
-    runtimeOnly 'com.mysql:mysql-connector-j'
+
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 }
 
 tasks.named('test') {
