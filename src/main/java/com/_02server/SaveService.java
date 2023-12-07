@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SaveService {
     static void saveDataToDB(List<Device> list) {
-        String DB_URL = "jdbc:mysql://com02-sts-1.mysql-parktest.default.svc.cluster.local:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
+        String DB_URL = "jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
         String DB_USER = "root";
         String DB_PASSWORD = "qwerty";
 

@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0708400-3e3d-4533-8340-d2b0b78157cd" name="변경" comment="Merge remote-tracking branch 'origin/rawCroller' into rawCroller&#10;&#10;# Conflicts:&#10;#&#9;build.gradle">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_02server/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d0708400-3e3d-4533-8340-d2b0b78157cd" name="변경" comment="이니셜라이저 패키징 동작 확인 완료&#10;동작 명령어&#10; java -jar ./Battery_Croller subBattery">
+      <change afterPath="$PROJECT_DIR$/output-subBattery.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/CategoryNumber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/Croller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/Croller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/FilterNMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/FilterNMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/Updater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/Updater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/Crawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/_02server/SaveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/_02server/SaveService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +45,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="rawCroller" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
         <option value="gwaks &lt;20202160@sungshin.ac.kr&gt;" />
@@ -77,6 +85,17 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;contexts&quot;: [
+    {
+      &quot;name&quot;: &quot;gke_instant-droplet-406401_asia-northeast3-c_com02cloud&quot;
+    }
+  ],
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="KubernetesSettings">
+    <option name="contextName" value="gke_instant-droplet-406401_asia-northeast3-c_com02cloud" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -87,36 +106,44 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2Ve0jlCq1dgc1Ef5IGAWJ5OHh3S" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20231128_0002",
-    "git-widget-placeholder": "rawCroller",
-    "last_opened_file_path": "C:/Users/gwaks/IdeaProjects/com02-BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "프로젝트",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20231207_0003&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;micro-crawler&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gwaks/IdeaProjects/com02-BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gwaks\IdeaProjects\com02-BackEnd\src" />
@@ -126,9 +153,9 @@
       <recent name="C:\Users\gwaks\OneDrive\문서\GitHub\com02-BackEnd" />
     </key>
   </component>
-  <component name="RunManager" selected="애플리케이션.BucketService">
-    <configuration name="BucketService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com._02server.BucketService" />
+  <component name="RunManager" selected="Gradle.crawler [bootJar]">
+    <configuration name="Crawler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com._02server.Crawler" />
       <module name="Battery_Croller.main" />
       <extension name="coverage">
         <pattern>
@@ -140,35 +167,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scheduled" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com._02server.Croller" />
-      <module name="Battery_Croller.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com._02server.com02backendproject.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Updater" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com._02server.Updater" />
-      <module name="Battery_Croller.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com._02server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Battery_Croller [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="crawler [bootBuildImage]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -179,7 +178,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="dependencies" />
+            <option value="bootBuildImage" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -190,26 +189,65 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Com02BackendProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="Battery_Croller.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com._02server.com02backendproject.Com02BackendProjectApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com._02server.com02backendproject.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="crawler [bootJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="crawler [jibDockerBuild]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jibDockerBuild" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="libs/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="build/libs/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="애플리케이션.BucketService" />
-        <item itemvalue="애플리케이션.Updater" />
-        <item itemvalue="Gradle.Battery_Croller [dependencies]" />
-        <item itemvalue="애플리케이션.Scheduled" />
-        <item itemvalue="Spring Boot.Com02BackendProjectApplication" />
+        <item itemvalue="Gradle.crawler [bootJar]" />
+        <item itemvalue="Docker.libs/Dockerfile" />
+        <item itemvalue="Gradle.crawler [bootBuildImage]" />
+        <item itemvalue="애플리케이션.Crawler" />
+        <item itemvalue="Gradle.crawler [jibDockerBuild]" />
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +294,12 @@
       <workItem from="1701140909422" duration="5846000" />
       <workItem from="1701150643128" duration="3838000" />
       <workItem from="1701155377124" duration="1140000" />
+      <workItem from="1701670444479" duration="8645000" />
+      <workItem from="1701753734125" duration="545000" />
+      <workItem from="1701768712925" duration="158000" />
+      <workItem from="1701783226774" duration="4069000" />
+      <workItem from="1701789595518" duration="19871000" />
+      <workItem from="1701939103536" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="no spring">
       <option name="closed" value="true" />
@@ -289,7 +333,23 @@
       <option name="project" value="LOCAL" />
       <updated>1695918432746</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="수정 완료 및 데이터베이스 생성 원활, 메인 함수 한개로 각자 분산 시스템 하에 돌릴 예정">
+      <option name="closed" value="true" />
+      <created>1701678320308</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701678320308</updated>
+    </task>
+    <task id="LOCAL-00006" summary="이니셜라이저 패키징 동작 확인 완료&#10;동작 명령어&#10; java -jar ./Battery_Croller subBattery">
+      <option name="closed" value="true" />
+      <created>1701791402536</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701791402536</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,9 +367,23 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="no spring" />
     <MESSAGE value="Merge remote-tracking branch 'origin/rawCroller' into rawCroller&#10;&#10;# Conflicts:&#10;#&#9;build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/rawCroller' into rawCroller&#10;&#10;# Conflicts:&#10;#&#9;build.gradle" />
+    <MESSAGE value="수정 완료 및 데이터베이스 생성 원활, 메인 함수 한개로 각자 분산 시스템 하에 돌릴 예정" />
+    <MESSAGE value="이니셜라이저 패키징 동작 확인 완료&#10;동작 명령어&#10; java -jar ./Battery_Croller subBattery" />
+    <option name="LAST_COMMIT_MESSAGE" value="이니셜라이저 패키징 동작 확인 완료&#10;동작 명령어&#10; java -jar ./Battery_Croller subBattery" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/build.gradle</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

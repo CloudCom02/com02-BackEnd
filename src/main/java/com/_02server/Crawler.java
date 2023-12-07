@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
+import org.openqa.selenium.chromium.ChromiumOptions;
 
 import java.io.IOException;
 import java.util.*;
@@ -18,12 +20,14 @@ public class Crawler {
         // CSV 파일 경로
         String csvFilePath = "output-"+category.eng+".csv";
 
-        ChromeDriverService service = new ChromeDriverService.Builder().withLogOutput(System.out).build();
+        System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
+
+        //ChromeDriverService service = new ChromeDriverService.Builder().withLogOutput(System.out).build();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-
-        WebDriver driver = new ChromeDriver(service,options);
+        options.addArguments("--headless","--no-sandbox","--disable-dev-shm-usage","--single-process");
+        //WebDriver driver = new ChromiumDriver(options);
+        WebDriver driver = new ChromeDriver(options);
 
         String cate = Integer.toString(category.cate); //여기를 바꿔서
         HashMap<String, String> nameConMap = new HashMap<>();
@@ -78,21 +82,22 @@ public class Crawler {
         }
     }
 
-    public static void main(String[] args) {
-        if (args.length != 0) {
-            for(String s : args) {
-                for(Category c : Category.values()) {
-                    try {
+    public static void main(String[] args) throws IOException {
+        try {
+            if (args.length != 0) {
+                for(String s : args) {
+                    for(Category c : Category.values()) {
                         if(c.eng.equals(s)) {
                             crawlInformation(c);
                         }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
                     }
                 }
+            } else {
+                System.out.println("what category do you want to update?????");
+                crawlInformation(Category.보조배터리);
             }
-        } else {
-            System.out.println("what category do you want to update?????");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
