@@ -26,7 +26,7 @@ public class Device {
     @Column(name = "maximum_output")
     private Double maximumOutput;
 
-    @Column(name = "wattPerhour")
+    @Column(name = "watt_perhour")
     private Double wattPerhour; // 전력량
 
     @Column(name = "category",length = 10)
