@@ -1,8 +1,9 @@
 package com._02server.com02backendproject.service;
 
-import com._02server.com02backendproject.dto.DeviceReq;
+import com._02server.com02backendproject.dto.CapacityOfUserReq;
 import com._02server.com02backendproject.dto.CapacityOfUserRes;
 import com._02server.com02backendproject.entities.CapacityOfUser;
+import com._02server.com02backendproject.entities.User;
 import com._02server.com02backendproject.global.BaseException;
 import com._02server.com02backendproject.repository.CapacityOfUserRepository;
 import com._02server.com02backendproject.repository.UserRepository;
@@ -26,20 +27,21 @@ public class CapacityOfUserService {
     private final CapacityOfUserRepository capacityOfUserRepository;
     private final UserRepository userRepository;
 
-    public void capacityOfUserAdd(DeviceReq.CapacityOfUserReq capacityOfUserReq)
+    public void capacityOfUserAdd(CapacityOfUserReq.CapacityOfUserAddReq capacityOfUserReq)
             throws BaseException, IOException {
+
+        User user = userRepository.findByUserId(capacityOfUserReq.getUserId());
 
         if (capacityOfUserReq == null) {
             throw new BaseException(EMPTY_INFORMATION);
-        } else if (userRepository.existsByUserId(capacityOfUserReq.getUser().getUserId())) {
+        } else if (user == null) {
             throw new BaseException(CANNOT_FIND_INFORMATION);
         } else {
             CapacityOfUser capacityOfUser = CapacityOfUser.builder()
-                    .userCapacityId(capacityOfUserReq.getUserCapacityId())
-                    .user(capacityOfUserReq.getUser())
-                    .nowCapacity(capacityOfUserReq.getNowCapacity())
+                    .user(user)
+                    .deviceName(capacityOfUserReq.getDeviceName())
                     .averageDays(capacityOfUserReq.getAverageDays())
-                    .parentDevice(capacityOfUserReq.getParentDevice())
+                    .category(capacityOfUserReq.getCategory())
                     .build();
 
             capacityOfUserRepository.save(capacityOfUser);
@@ -47,7 +49,7 @@ public class CapacityOfUserService {
     }
 
     @Transactional
-    public void capacityOfUserDelete(DeviceReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
+    public void capacityOfUserDelete(CapacityOfUserReq.CapacityOfUserDeleteReq capacityOfUserDeleteReq)
             throws BaseException, IOException {
         if (capacityOfUserDeleteReq == null) throw new BaseException(EMPTY_INFORMATION);
 
@@ -67,7 +69,7 @@ public class CapacityOfUserService {
 
     // 더티 체킹
     @Transactional
-    public void capacityOfUserEdit(DeviceReq.CapacityOfUserUpdateReq capacityOfUserReq)
+    public void capacityOfUserEdit(CapacityOfUserReq.CapacityOfUserUpdateReq capacityOfUserReq)
             throws BaseException, IOException {
         if (capacityOfUserReq == null) throw new BaseException(EMPTY_INFORMATION);
 
@@ -79,13 +81,12 @@ public class CapacityOfUserService {
         } else if (userRepository.existsByUserId(capacityOfUserReq.getUserCapacityId())) {
             throw new BaseException(CANNOT_FIND_INFORMATION);
         } else {
-            capacityOfUserOptional.get().setNowCapacity(capacityOfUserReq.getNowCapacity());
             capacityOfUserOptional.get().setAverageDays(capacityOfUserReq.getAverageDays());
         }
     }
 
 
-    public void BatteryLevelUpdate(DeviceReq.BatteryLevelReq batteryLevelReq)
+    public void BatteryLevelUpdate(CapacityOfUserReq.BatteryLevelReq batteryLevelReq)
             throws BaseException, IOException {
         if (batteryLevelReq == null) throw new BaseException(EMPTY_INFORMATION);
 
@@ -125,7 +126,6 @@ public class CapacityOfUserService {
 
                 capacityOfUserRes.add(deviceDTO);
             }
-
             return capacityOfUserRes;
         }
     }

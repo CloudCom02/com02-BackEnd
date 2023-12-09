@@ -3,6 +3,7 @@ package com._02server.com02backendproject.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -17,7 +18,6 @@ public class CapacityOfUser {
     @Column(name="user_capacity_id")
     private Long userCapacityId; // 사용자-배터리 ID
 
-    @NonNull
     @Column(name = "now_capacity")
     private Double nowCapacity; // 현재 배터리 용량
 
@@ -30,10 +30,13 @@ public class CapacityOfUser {
     private User user; // 사용자 ID
 
     // 부모 정의
-    @NonNull
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_device")
-    private Device parentDevice; // 부모기기 ID
+    private Long parentDevice; // 부모기기 ID
 
+    @JoinColumn(name = "device_name")
+    private String deviceName;
+
+    @JoinColumn(name = "category")
+    private String category;
     //cascade 설정
 }

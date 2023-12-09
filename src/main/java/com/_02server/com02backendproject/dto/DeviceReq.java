@@ -1,12 +1,11 @@
 package com._02server.com02backendproject.dto;
 
-import com._02server.com02backendproject.entities.Device;
 import com._02server.com02backendproject.entities.User;
-import lombok.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.sql.Time;
 
 public class DeviceReq {
     @NoArgsConstructor
@@ -20,39 +19,29 @@ public class DeviceReq {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class CapacityOfUserReq{
-        Long userCapacityId;
+    public static class DeviceAllReq{
+        Long parentId;
+        Double entireCapacity;
+        Time usingTime;
+        Time chargingTime;
+        Double wattageW;
+        String category;
+        String imageURL;
+        String isRegistered;
         User user;
-        Double nowCapacity;
-        Double averageDays;
-        Device parentDevice;
+        String contents;
+        Integer mAh;
+        Double maximumOutput;
+        String deviceName;
+        Double volt;
+        Integer wattPerhour;
     }
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class CapacityOfUserDeleteReq{
-        Long userCapacityId;
-    }
-
-
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class CapacityOfUserUpdateReq{
-        Long userCapacityId;
-        Double nowCapacity;
-        Double averageDays;
-    }
-
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class BatteryLevelReq{
-        Long userCapacityId;
-        Double nowCapacity;
+    public static class DeviceIdReq{
+        String deviceName;
     }
 }
