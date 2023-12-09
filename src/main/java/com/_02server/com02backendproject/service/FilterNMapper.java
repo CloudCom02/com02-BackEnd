@@ -23,7 +23,7 @@ public class FilterNMapper {
     }
     public Device mapping(String name, String contents) {
         Device result = new Device();
-        result.setName(name);
+        result.setDeviceName(name);
         result.setCategory(category.toString());
 
         String[] conArray = contents.split("/");

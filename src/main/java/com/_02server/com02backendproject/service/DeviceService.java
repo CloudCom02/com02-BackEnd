@@ -47,7 +47,7 @@ public class DeviceService {
                     .user(deviceAddReq.getUser())
                     .contents(deviceAddReq.getContents())
                     .mAh(deviceAddReq.getMAh())
-                    .maximumOutput(deviceAddReq.getMaximumOutput())
+                    .maximum_output(deviceAddReq.getMaximum_output())
                     .deviceName(deviceAddReq.getDeviceName())
                     .volt(deviceAddReq.getVolt())
                     .wattPerhour(deviceAddReq.getWattPerhour())
@@ -92,7 +92,7 @@ public class DeviceService {
             deviceOptional.get().setParentId(deviceEditReq.getParentId());
             deviceOptional.get().setContents(deviceEditReq.getContents());
             deviceOptional.get().setMAh(deviceEditReq.getMAh());
-            deviceOptional.get().setMaximumOutput(deviceEditReq.getMaximumOutput());
+            deviceOptional.get().setMaximum_output(deviceEditReq.getMaximum_output());
             deviceOptional.get().setDeviceName(deviceEditReq.getDeviceName());
             deviceOptional.get().setWattPerhour(deviceEditReq.getWattPerhour());
         }
@@ -100,17 +100,17 @@ public class DeviceService {
 
 
     @Transactional
-    public List<DeviceRes> deviceRead(DeviceReq.DeviceIdReq deviceIdReq)
+    public List<DeviceRes.DeviceAllRes> deviceRead(DeviceReq.DeviceIdReq deviceIdReq)
             throws BaseException, IOException {
         if (deviceIdReq == null) throw new BaseException(EMPTY_INFORMATION);
 
         Device device;
-        List<DeviceRes> deviceRes = new ArrayList<>();
-        DeviceRes deviceDTO;
+        List<DeviceRes.DeviceAllRes> deviceRes = new ArrayList<>();
+        DeviceRes.DeviceAllRes deviceDTO;
 
         device = deviceRepository.findByDeviceName(deviceIdReq.getDeviceName());
 
-        deviceDTO = DeviceRes.builder()
+        deviceDTO = DeviceRes.DeviceAllRes.builder()
                 .entireCapacity(device.getEntireCapacity())
                 .isRegistered(device.getIsRegistered())
                 .user(device.getUser())
@@ -120,7 +120,7 @@ public class DeviceService {
                 .wattage(device.getWattageW())
                 .contents(device.getContents())
                 .mAh(device.getMAh())
-                .maximumOutput(device.getMaximumOutput())
+                .maximum_output(device.getMaximum_output())
                 .deviceName(device.getDeviceName())
                 .volt(device.getVolt())
                 .wattPerhour(device.getWattPerhour())
@@ -141,10 +141,12 @@ public class DeviceService {
 
         deviceDetailRes = DeviceDetailRes.builder()
                 .deviceName(device.getDeviceName())
-                .wattageW(device.getWattageW())
-                .contents(device.getDeviceName())
+                .contents(device.getContents())
                 .volt(device.getVolt())
                 .category(device.getCategory())
+                .usingTime(device.getUsingTime().toString())
+                .maximum_output(device.getMaximum_output())
+                .entireCapacity((device.getEntireCapacity()))
                 .build();
 
         return deviceDetailRes;

@@ -1,21 +1,17 @@
 package com._02server.com02backendproject.controller;
 
+import com._02server.com02backendproject.dto.DeviceDetailRes;
 import com._02server.com02backendproject.dto.DeviceReq;
 import com._02server.com02backendproject.global.BaseException;
 import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.DeviceService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import com._02server.com02backendproject.dto.DeviceRes;
 import com._02server.com02backendproject.entities.Category;
 import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.SearchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +23,9 @@ import static com._02server.com02backendproject.service.CrawlerService.crawlInfo
 @RestController
 @RequestMapping("/device")
 public class DeviceController {
+
+    private final DeviceService deviceService;
+
     @GetMapping("/init")
     public BaseResponse<Void> init(@RequestParam String category ) throws IOException {
         Category cate = null;
@@ -51,5 +50,14 @@ public class DeviceController {
 
         // 원하는 동작 수행 후 결과 반환
         return deviceRes;
+    }
+
+
+    // 한 기기의 정보 읽어오기
+    @GetMapping("/list/{deviceName}")
+    public BaseResponse<DeviceDetailRes> deviceDetailRead(@PathVariable("deviceName") String deviceName)
+    throws BaseException, IOException{
+        DeviceDetailRes deviceDetailRes = deviceService.deviceDetailRead(deviceName);
+        return new BaseResponse<>(deviceDetailRes);
     }
 }

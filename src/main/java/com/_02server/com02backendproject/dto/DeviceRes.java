@@ -25,8 +25,8 @@ public class DeviceRes {
     @Getter
     @Setter
     @Transactional
-    public class DeviceAllRes {
-        Double entireCapacity;
+    public static class DeviceAllRes {
+        Integer entireCapacity;
         Time usingTime;
         Time chargingTime;
         Double wattage;
@@ -35,16 +35,16 @@ public class DeviceRes {
         User user;
         String contents;
         Integer mAh;
-        Double maximumOutput;
+        Double maximum_output;
         String deviceName;
         Double volt;
         Integer wattPerhour;
 
 
         @Builder
-        public DeviceRes (Double entireCapacity, Time usingTime, Time chargingTime, Double wattage,
+        public DeviceAllRes (Integer entireCapacity, Time usingTime, Time chargingTime, Double wattage,
                           String category, String isRegistered, User user, String contents,
-                          Integer mAh, Double maximumOutput, String deviceName, Double volt, Integer wattPerhour) {
+                          Integer mAh, Double maximum_output, String deviceName, Double volt, Integer wattPerhour) {
             this.entireCapacity = entireCapacity;
             this.usingTime = usingTime;
             this.chargingTime = chargingTime;
@@ -52,7 +52,7 @@ public class DeviceRes {
             this.isRegistered = isRegistered;
             this.user = user;
             this.mAh = mAh;
-            this.maximumOutput = maximumOutput;
+            this.maximum_output = maximum_output;
             this.deviceName = deviceName;
             this.volt = volt;
             this.wattPerhour = wattPerhour;

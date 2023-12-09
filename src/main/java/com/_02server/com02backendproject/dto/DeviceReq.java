@@ -21,7 +21,7 @@ public class DeviceReq {
     @Setter
     public static class DeviceAllReq{
         Long parentId;
-        Double entireCapacity;
+        Integer entireCapacity;
         Time usingTime;
         Time chargingTime;
         Double wattageW;
@@ -31,7 +31,7 @@ public class DeviceReq {
         User user;
         String contents;
         Integer mAh;
-        Double maximumOutput;
+        Double maximum_output;
         String deviceName;
         Double volt;
         Integer wattPerhour;

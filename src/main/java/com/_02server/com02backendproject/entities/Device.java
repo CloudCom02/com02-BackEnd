@@ -18,9 +18,6 @@ public class Device {
     @Column(name="parent_id")
     private Long parentId; // 부모 기기 id
 
-    @Column(name = "device_name")
-    private String name; // 분류
-
     @Column(name = "entire_capacity")
     private Integer entireCapacity; // 배터리 용량
 
@@ -46,21 +43,23 @@ public class Device {
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
 
-    private String contents;
-    private double volt = 3.7;
-
     @JoinColumn(name = "contents")
     private String contents;
 
     @JoinColumn(name = "mAh")
     private Integer mAh;
 
-    @JoinColumn(name = "maximumOutput")
-    private Double maximumOutput;
-
     @JoinColumn(name = "volt")
     private Double volt;
 
+    @Column(name = "using_time")
+    private Time usingTime; // 최대 사용 시간
+
+    @Column(name = "charging_time")
+    private Time chargingTime; // 충전 시간
+
+    @JoinColumn(name = "deviceName")
+    private String deviceName;
 
 //    @OneToMany(mappedBy = "parentId")
 //    @Column(name = "subDevice")

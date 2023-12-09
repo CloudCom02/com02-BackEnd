@@ -1,24 +1,29 @@
 package com._02server.com02backendproject.dto;
 
-import lombok.Builder;
+import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class DeviceDetailRes {
     String deviceName;
-    Double wattageW;
-    Double nowCapacity;
-    String contents;
-    Double volt;
     String category;
-
+    Integer entireCapacity;
+    Double maximum_output;
+    String contents;
+    String usingTime;
+    Double volt;
 
     @Builder
-    public DeviceDetailRes (String deviceName, Double wattageW, Double nowCapacity,
-                      String contents, Double volt, String category) {
+    public DeviceDetailRes (String deviceName, Integer entireCapacity, Double maximum_output,
+                      String contents, String usingTime, Double volt, String category) {
         this.deviceName = deviceName;
-        this.wattageW = wattageW;
-        this.nowCapacity = nowCapacity;
+        this.entireCapacity = entireCapacity;
+        this.maximum_output = maximum_output;
         this.contents = contents;
         this.volt = volt;
         this.category = category;
+        this.usingTime = usingTime;
     }
 }

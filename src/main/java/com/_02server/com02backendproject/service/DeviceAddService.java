@@ -49,7 +49,7 @@ public class DeviceAddService {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
             // 각 필드에 대한 값을 설정
-            preparedStatement.setString(1, device.getName());
+            preparedStatement.setString(1, device.getDeviceName());
             preparedStatement.setString(2, device.getCategory());
             preparedStatement.setDouble(3, device.getMaximum_output());
             preparedStatement.setInt(4, device.getWattPerhour());
