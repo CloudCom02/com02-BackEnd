@@ -28,7 +28,7 @@ public class Device {
     private Time chargingTime; // 충전 시간
 
     @Column(name = "wattage_W")
-    private Double wattage; // 전력량
+    private Double wattageW; // 전력량
 
     @Column(name = "category")
     private String category; // 분류
@@ -42,7 +42,26 @@ public class Device {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user; // 사용자 ID
-    //sy-gwak
+
+    @JoinColumn(name = "contents")
+    private String contents;
+
+    @JoinColumn(name = "mAh")
+    private Integer mAh;
+
+    @JoinColumn(name = "maximumOutput")
+    private Double maximumOutput;
+
+    @JoinColumn(name = "deviceName")
+    private String deviceName;
+
+    @JoinColumn(name = "volt")
+    private Double volt;
+
+    @JoinColumn(name = "maximumOutput")
+    private Integer wattPerhour;
+
+//sy-gwak
 //    @OneToMany(mappedBy = "parentId")
 //    @Column(name = "subDevice")
 //    private Device subDevice; // 부속기기 // List<>로 담는 것이 나은건지?

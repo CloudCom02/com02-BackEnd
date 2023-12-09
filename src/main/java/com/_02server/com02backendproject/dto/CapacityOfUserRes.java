@@ -19,11 +19,11 @@ public class CapacityOfUserRes {
 
     @Builder
     public CapacityOfUserRes(Long userCapacityId, User user,
-                             Double nowCapacity, Double averageDays, Device parentDevice){
+                             Double nowCapacity, Double averageDays, Long parentDevice){
         this.userCapacityId = userCapacityId;
         this.user = user.getUserId();
         this.nowCapacity = nowCapacity;
         this.averageDays = averageDays;
-        this.parentDevice = parentDevice.getParentId();
+        this.parentDevice = parentDevice;
     }
 }
