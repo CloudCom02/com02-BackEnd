@@ -5,8 +5,6 @@ import com._02server.com02backendproject.global.BaseResponse;
 import com._02server.com02backendproject.service.UserService;
 import com._02server.com02backendproject.dto.UserReq;
 import com._02server.com02backendproject.global.BaseException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,20 +44,15 @@ public class UserController {
 
     // 이메일 전송
     @PostMapping("/emails/verification-requests")
-    public BaseResponse<Void> sendMessage(@RequestBody UserReq.UserSendEmailReq userSendEmailReq, HttpServletRequest request) throws BaseException {
-        String code = userService.sendCodeToEmail(userSendEmailReq.getEmail(), userSendEmailReq.getIsForJoin());
-
-        HttpSession session = request.getSession();
-        session.setAttribute("email", userSendEmailReq.getEmail());
-        session.setAttribute("code", code);
-
-        return new BaseResponse<>(SUCCESS);
+    public BaseResponse<UserRes.UserEmailCodeRes> sendMessage(@RequestBody UserReq.UserSendEmailReq userSendEmailReq) throws BaseException {
+        UserRes.UserEmailCodeRes res = userService.sendCodeToEmail(userSendEmailReq.getEmail(), userSendEmailReq.getIsForJoin());
+        return new BaseResponse<>(res);
     }
 
     // 이메일 인증
     @PostMapping("/emails/verifications")
-    public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(@RequestBody UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq, HttpServletRequest request) throws BaseException {
-        Boolean isCorrected = userService.verifiedCode(userEmailCodeCheckReq.getEmail(), userEmailCodeCheckReq.getCode(), request);
+    public BaseResponse<UserRes.UserEmailCodeCheckRes> verificationEmail(@RequestBody UserReq.UserEmailCodeCheckReq userEmailCodeCheckReq) throws BaseException {
+        Boolean isCorrected = userService.verifiedCode(userEmailCodeCheckReq.getCorrectCode(), userEmailCodeCheckReq.getInputCode());
         UserRes.UserEmailCodeCheckRes res = new UserRes.UserEmailCodeCheckRes(isCorrected);
         return new BaseResponse<>(res);
     }

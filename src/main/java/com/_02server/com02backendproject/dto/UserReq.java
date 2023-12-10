@@ -47,8 +47,8 @@ public class UserReq {
     @Getter
     @Setter
     public static class UserEmailCodeCheckReq { // 인증 코드 검증 요청
-        String email;
-        String code;
+        String correctCode;
+        String inputCode;
     }
 
     @NoArgsConstructor

@@ -19,6 +19,14 @@ public class UserRes {
     @AllArgsConstructor
     @Getter
     @Setter
+    public static class UserEmailCodeRes { // 이메일 전송 response
+        String code;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class UserEmailCodeCheckRes { // 이메일 인증 코드 검증 response
         Boolean isCorrected;
     }
