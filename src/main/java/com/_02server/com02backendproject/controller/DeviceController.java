@@ -68,5 +68,6 @@ public class DeviceController {
         deviceService.deviceDelete(deviceIdReq);
         return new BaseResponse<>(SUCCESS);
     }
+    
 }
 

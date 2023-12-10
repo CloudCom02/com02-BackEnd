@@ -70,7 +70,6 @@ public class CapacityOfUserController {
     // 개별 디바이스 정보 읽어오기
     @GetMapping (value = "/deviceOfList/{deviceName}")
     public BaseResponse<CapacityOfUserDeviceRes> deviceOfListRead(
-//            @RequestBody CapacityOfUserReq.CapacityOfUserDeviceReq capacityOfUserDeviceReq)
             @PathVariable("deviceName") String deviceName)
         throws BaseException,IOException{
         CapacityOfUserDeviceRes capacityOfUserDeviceRes = capacityOfUserService.deviceOfListRead(deviceName);

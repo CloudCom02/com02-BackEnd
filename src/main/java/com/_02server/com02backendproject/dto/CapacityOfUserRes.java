@@ -11,19 +11,13 @@ import lombok.*;
 @Transactional
 public class CapacityOfUserRes {
 
-    Long userCapacityId;
-    Long user;
-    Double nowCapacity;
-    Double averageDays;
-    Long parentDevice;
-
+    String deviceName;
+    String category;
+    Double batteryLevel;
     @Builder
-    public CapacityOfUserRes(Long userCapacityId, User user,
-                             Double nowCapacity, Double averageDays, Long parentDevice){
-        this.userCapacityId = userCapacityId;
-        this.user = user.getUserId();
-        this.nowCapacity = nowCapacity;
-        this.averageDays = averageDays;
-        this.parentDevice = parentDevice;
+    public CapacityOfUserRes(String deviceName, String category, Double batteryLevel){
+        this.deviceName = deviceName;
+        this.category = category;
+        this.batteryLevel = batteryLevel;
     }
 }

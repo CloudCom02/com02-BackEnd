@@ -121,11 +121,9 @@ public class CapacityOfUserService {
 
             for (int i = 0; i < capacityOfUsers.size(); i++) {
                 deviceDTO = CapacityOfUserRes.builder()
-                        .userCapacityId(capacityOfUsers.get(i).getUserCapacityId())
-                        .user(capacityOfUsers.get(i).getUser())
-                        .nowCapacity(capacityOfUsers.get(i).getNowCapacity())
-                        .averageDays(capacityOfUsers.get(i).getAverageDays())
-                        .parentDevice(capacityOfUsers.get(i).getParentDevice())
+                        .deviceName(capacityOfUsers.get(i).getDeviceName())
+                        .category(capacityOfUsers.get(i).getCategory())
+                        .batteryLevel(capacityOfUsers.get(i).getNowCapacity())
                         .build();
 
                 capacityOfUserRes.add(deviceDTO);
