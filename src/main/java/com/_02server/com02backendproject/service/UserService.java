@@ -57,19 +57,17 @@ public class UserService {
         }
     }
 
-    public String sendCodeToEmail(String email, boolean isForJoin) throws BaseException {
+    public UserRes.UserEmailCodeRes sendCodeToEmail(String email, boolean isForJoin) throws BaseException {
         this.checkDuplicatedEmail(email, isForJoin);
 
         String title = "[아맞다충전!] 이메일 인증 번호 안내";
         String authCode = this.createCode();
         String content = "하단에 안내된 6자리 인증 번호를 입력해주세요.\n" + authCode;
 
-        mailService.sendEmail(email, title, content);
-        return authCode;
+        UserRes.UserEmailCodeRes res = new UserRes.UserEmailCodeRes(authCode);
 
-//        // 이메일 인증 요청 시 인증 번호 Redis에 저장 ( key = "AuthCode " + Email / value = AuthCode )
-//        redisService.setValues(AUTH_CODE_PREFIX + toEmail,
-//                authCode, Duration.ofMillis(this.authCodeExpirationMillis));
+        mailService.sendEmail(email, title, content);
+        return res;
     }
 
     private void checkDuplicatedEmail(String email, boolean isForJoin) throws BaseException {
@@ -100,21 +98,12 @@ public class UserService {
         }
     }
 
-    public Boolean verifiedCode(String email, String authCode, HttpServletRequest request) throws BaseException {
-        String correctCode = request.getSession().getAttribute("code").toString();
-        String correctEmail = request.getSession().getAttribute("email").toString();
-
-        if (correctCode.equals(authCode) && correctEmail.equals(email)) {
+    public Boolean verifiedCode(String correctCode, String inputCode) throws BaseException {
+        if (correctCode.equals(inputCode)) {
             return true;
-        } else if (!email.equals(correctEmail)) {
-            throw new BaseException(INCORRECT_EMAIL);
         } else {
             throw new BaseException(INCORRECT_CODE);
         }
-
-//        String redisAuthCode = redisService.getValues(AUTH_CODE_PREFIX + email);
-//        boolean authResult = redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
-//        return EmailVerificationResult.of(authResult);
     }
 
     public Boolean checkDupEmail(String email) throws BaseException {
