@@ -60,4 +60,13 @@ public class DeviceController {
         DeviceDetailRes deviceDetailRes = deviceService.deviceDetailRead(deviceName);
         return new BaseResponse<>(deviceDetailRes);
     }
+
+    // 한 기기 삭제
+    @PutMapping("/list/delete")
+    public BaseResponse<Void> deviceDetailDelete(@RequestBody DeviceReq.DeviceIdReq deviceIdReq)
+        throws BaseException, IOException{
+        deviceService.deviceDelete(deviceIdReq);
+        return new BaseResponse<>(SUCCESS);
+    }
 }
+

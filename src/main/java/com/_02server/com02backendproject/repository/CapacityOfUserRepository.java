@@ -10,7 +10,8 @@ import java.util.Optional;
 @Repository
 public interface CapacityOfUserRepository extends JpaRepository<CapacityOfUser, Long> {
     Optional<CapacityOfUser> findByUserCapacityId(Long userCapacityId);
-    List<CapacityOfUser> findAllByUser_UserId(Long userId);
     void deleteByUserCapacityId(Long userCapacityId);
     List<CapacityOfUser> findByUser_UserId(Long userId);
+    CapacityOfUser findByDeviceName(String deviceName);
+    void deleteByDeviceName(String deviceName);
 }

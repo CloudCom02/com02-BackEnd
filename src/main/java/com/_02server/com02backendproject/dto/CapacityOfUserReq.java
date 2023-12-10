@@ -46,4 +46,13 @@ public class CapacityOfUserReq {
         Long userCapacityId;
         Double nowCapacity;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class CapacityOfUserDeviceReq {
+        Long userId;
+        String deviceName;
+    }
 }

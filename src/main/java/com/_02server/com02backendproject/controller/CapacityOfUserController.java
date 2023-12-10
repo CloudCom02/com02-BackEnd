@@ -1,5 +1,6 @@
 package com._02server.com02backendproject.controller;
 
+import com._02server.com02backendproject.dto.CapacityOfUserDeviceRes;
 import com._02server.com02backendproject.dto.CapacityOfUserReq;
 import com._02server.com02backendproject.dto.CapacityOfUserRes;
 import com._02server.com02backendproject.global.BaseException;
@@ -64,5 +65,15 @@ public class CapacityOfUserController {
         throws BaseException, IOException{
         List<CapacityOfUserRes> capacityOfUserRes = capacityOfUserService.capacityOfUserRead(userId);
         return new BaseResponse<>(capacityOfUserRes);
+    }
+
+    // 개별 디바이스 정보 읽어오기
+    @GetMapping (value = "/deviceOfList/{deviceName}")
+    public BaseResponse<CapacityOfUserDeviceRes> deviceOfListRead(
+//            @RequestBody CapacityOfUserReq.CapacityOfUserDeviceReq capacityOfUserDeviceReq)
+            @PathVariable("deviceName") String deviceName)
+        throws BaseException,IOException{
+        CapacityOfUserDeviceRes capacityOfUserDeviceRes = capacityOfUserService.deviceOfListRead(deviceName);
+        return new BaseResponse<>(capacityOfUserDeviceRes);
     }
 }

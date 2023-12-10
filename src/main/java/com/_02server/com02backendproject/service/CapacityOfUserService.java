@@ -1,11 +1,14 @@
 package com._02server.com02backendproject.service;
 
+import com._02server.com02backendproject.dto.CapacityOfUserDeviceRes;
 import com._02server.com02backendproject.dto.CapacityOfUserReq;
 import com._02server.com02backendproject.dto.CapacityOfUserRes;
 import com._02server.com02backendproject.entities.CapacityOfUser;
+import com._02server.com02backendproject.entities.Device;
 import com._02server.com02backendproject.entities.User;
 import com._02server.com02backendproject.global.BaseException;
 import com._02server.com02backendproject.repository.CapacityOfUserRepository;
+import com._02server.com02backendproject.repository.DeviceRepository;
 import com._02server.com02backendproject.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,7 @@ public class CapacityOfUserService {
 
     private final CapacityOfUserRepository capacityOfUserRepository;
     private final UserRepository userRepository;
+    private final DeviceRepository deviceRepository;
 
     public void capacityOfUserAdd(CapacityOfUserReq.CapacityOfUserAddReq capacityOfUserReq)
             throws BaseException, IOException {
@@ -128,5 +132,29 @@ public class CapacityOfUserService {
             }
             return capacityOfUserRes;
         }
+    }
+
+    @Transactional
+    public CapacityOfUserDeviceRes deviceOfListRead(String deviceName)
+        throws BaseException, IOException {
+            if (deviceName == null) throw new BaseException(EMPTY_INFORMATION);
+
+            CapacityOfUserDeviceRes capacityOfUserDeviceRes;
+
+            CapacityOfUser capacityOfUser = capacityOfUserRepository.findByDeviceName(deviceName);
+            Device device = deviceRepository.findByDeviceName(deviceName);
+
+            capacityOfUserDeviceRes = CapacityOfUserDeviceRes.builder()
+                    .mAh(device.getMAh())
+                    .contents(device.getContents())
+                    .usingTime(device.getUsingTime().toString())
+                    .maximum_output(device.getMaximum_output())
+                    .capacityOfUserId(capacityOfUser.getUserCapacityId())
+                    .averageDays(capacityOfUser.getAverageDays())
+                    .nowCapacity(capacityOfUser.getNowCapacity())
+                    .deviceName(capacityOfUser.getDeviceName())
+                    .category(device.getCategory()).build();
+
+            return capacityOfUserDeviceRes;
     }
 }
