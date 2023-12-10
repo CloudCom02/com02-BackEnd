@@ -2,22 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.1.3'
-    id 'com.google.cloud.tools.jib' version '3.2.0'
-}
-
-jib {
-    from {
-        image = "openjdk:17-oracle"
-        platforms {
-            platform {
-                architecture = "amd64"
-                os = "linux"            }
-        }
-    }
-    to {
-        image = "shinyenggwak/onlyuser"
-        tags = ["latest"]
-    }
 }
 
 group = 'com._02server'
@@ -38,6 +22,9 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.8.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.8.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-safari-driver', version: '4.12.0'
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -56,6 +43,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    testImplementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.12.0'
+    testImplementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.12.0'
 }
 
 tasks.named('test') {
