@@ -86,6 +86,8 @@ public class CapacityOfUserService {
             throw new BaseException(CANNOT_FIND_INFORMATION);
         } else {
             capacityOfUserOptional.get().setAverageDays(capacityOfUserReq.getAverageDays());
+            capacityOfUserOptional.get().setDeviceName(capacityOfUserReq.getDeviceName());
+            capacityOfUserOptional.get().setNowCapacity(capacityOfUserReq.getNowCapacity());
         }
     }
 

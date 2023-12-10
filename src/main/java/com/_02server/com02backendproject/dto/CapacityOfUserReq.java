@@ -34,7 +34,7 @@ public class CapacityOfUserReq {
     public static class CapacityOfUserUpdateReq{
         Long userCapacityId;
         String deviceName;
-        String category;
+        Double nowCapacity;
         Double averageDays;
     }
 
