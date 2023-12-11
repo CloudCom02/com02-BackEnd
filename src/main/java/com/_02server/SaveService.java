@@ -13,10 +13,10 @@ import java.util.List;
 
 
 public class SaveService {
+    static String DB_URL = System.getenv("DB_URL");
+    static String DB_USER = System.getenv("DB_USERNAME");
+    static String DB_PASSWORD = System.getenv("DB_PASSWORD");
     static void saveDataToDB(List<Device> list) {
-        String DB_URL = "jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
-        String DB_USER = "root";
-        String DB_PASSWORD = "qwerty";
 
         try {
             // 데이터베이스 연결
@@ -54,7 +54,7 @@ public class SaveService {
     }
 
     private static void insertDevice(Connection connection, List<Device> devices) throws SQLException {
-        String insertQuery = "INSERT INTO device (device_name,category,maximum_output,wattPerhour,entire_capacity,imageURL) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO device (device_name,category,maximum_output,watt_perhour,entire_capacity,imageurl) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
             for(Device device : devices ) {

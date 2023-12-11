@@ -16,7 +16,7 @@ jib {
     }
     to {
         image = "shinyenggwak/micro-crawl"
-        tags = ["latest"]
+        tags = ["0.0.1"]
     }
 }
 
