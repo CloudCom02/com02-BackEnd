@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.google.cloud.tools.jib' version '3.2.0'
+    id 'org.springframework.boot' version '2.5.1'
 }
 
 jib {
@@ -15,8 +16,12 @@ jib {
     }
     to {
         image = "shinyenggwak/micro-updater"
-        tags = ["0.1"]
+        tags = ["0.1.1"]
     }
+}
+
+bootJar {
+    mainClass = 'com._02server.Updater'
 }
 
 group 'org.example'
@@ -28,8 +33,8 @@ repositories {
 
 
 dependencies {
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.12.0'
-    implementation 'com.google.cloud:google-cloud-storage:2.29.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.10.0'
+
     implementation 'mysql:mysql-connector-java:8.0.31'
 }
 

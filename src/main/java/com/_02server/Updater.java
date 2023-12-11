@@ -27,11 +27,13 @@ public class Updater {
     public static void updateThisCategory(Category category) {
         HashSet<String> crolledSet = new HashSet<>();
 
-        String tmpCsvPath = "output-subBattery.csv";
+        String tmpCsvPath = "output-"+category.eng+".csv";
+        System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
+
         HashSet<String> prevSavedSet = retrieveDeviceNames();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless","--no-sandbox","--disable-dev-shm-usage","--single-process");
 
         WebDriver driver = new ChromeDriver(options);
 
