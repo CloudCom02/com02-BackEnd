@@ -16,7 +16,7 @@ jib {
     }
     to {
         image = "shinyenggwak/onlydevice"
-        tags = ["latest"]
+        tags = ["0.1.5"]
     }
 }
 
