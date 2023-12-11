@@ -7,7 +7,7 @@ plugins {
 
 jib {
     from {
-        image = "openjdk:17-oracle"
+        image = "openjdk:17-slim"
         platforms {
             platform {
                 architecture = "amd64"
@@ -16,8 +16,12 @@ jib {
     }
     to {
         image = "shinyenggwak/onlydevice"
-        tags = ["0.1.5"]
+        tags = ["0.1.6"]
     }
+}
+
+bootJar {
+    mainClass = "com._02server.com02backendproject.Com02BackendProjectApplication"
 }
 
 group = 'com._02server'
@@ -45,6 +49,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'com.mysql:mysql-connector-j:8.0.31'
 
+    runtimeOnly 'com.mysql:mysql-connector-j:8.0.31'
 
     annotationProcessor 'org.projectlombok:lombok'
 
