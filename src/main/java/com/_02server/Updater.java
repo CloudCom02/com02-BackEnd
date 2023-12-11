@@ -23,7 +23,6 @@ import java.util.*;
 import static com._02server.SaveService.*;
 
 public class Updater {
-    public Updater() {}
     public static void updateThisCategory(Category category) {
         HashSet<String> crolledSet = new HashSet<>();
 
@@ -112,7 +111,7 @@ public class Updater {
     protected static int dataUpdate(Set<String> needUpdateSet, Category category) {
         Map<String,String> newDataMap = new HashMap<>();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless","--no-sandbox","--disable-dev-shm-usage","--single-process");
         WebDriver driver = new ChromeDriver(options);//너무 많이 생성됨
         System.out.println("< "+category+" 업데이트 항목 >");
         List<Device> devices = new ArrayList<>();
