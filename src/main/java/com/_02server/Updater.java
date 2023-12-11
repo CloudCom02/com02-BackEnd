@@ -20,8 +20,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.*;
 import java.util.*;
 
-import static com._02server.SaveService.saveDataToCSV;
-import static com._02server.SaveService.saveDataToDB;
+import static com._02server.SaveService.*;
 
 public class Updater {
     public Updater() {}
@@ -29,7 +28,7 @@ public class Updater {
         HashSet<String> crolledSet = new HashSet<>();
 
         String tmpCsvPath = "output-subBattery.csv";
-        HashSet<String> prevSavedSet = loadNameListFile(tmpCsvPath);
+        HashSet<String> prevSavedSet = retrieveDeviceNames();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -50,6 +49,7 @@ public class Updater {
 
     }
 
+    //파일로 버퍼링하는 방식.... 일단 안해!!! -> filter로 배터리케이스같은 자잘한거 떨어트릴 때 필요한 방식임!
     private static HashSet<String> loadNameListFile(String tmpCsvPath) {
         //접근하기
         File dataFile = new File(tmpCsvPath);
@@ -68,7 +68,6 @@ public class Updater {
         } catch (IOException e) {
             System.out.println("내용이없네???");
         }
-
         return nameSet;
     }
 

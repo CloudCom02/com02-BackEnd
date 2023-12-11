@@ -3,20 +3,18 @@ package com._02server;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 
 public class SaveService {
+    static String DB_URL = System.getenv("DB_URL");
+    static String DB_USER = System.getenv("DB_USERNAME");
+    static String DB_PASSWORD = System.getenv("DB_PASSWORD");
     static void saveDataToDB(List<Device> list) {
-        String DB_URL = "jdbc:mysql://0.0.0.0:3306/com02?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
-        String DB_USER = "root";
-        String DB_PASSWORD = "Cloudcom02!";
 
         try {
             // 데이터베이스 연결
@@ -54,7 +52,7 @@ public class SaveService {
     }
 
     private static void insertDevice(Connection connection, List<Device> devices) throws SQLException {
-        String insertQuery = "INSERT INTO device (device_name,category,maximum_output,wattPerhour,entire_capacity,imageURL) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO device (device_name,category,maximum_output,watt_perhour,entire_capacity,imageurl) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
             for(Device device : devices ) {
@@ -72,5 +70,23 @@ public class SaveService {
             }
             preparedStatement.executeBatch();
         }
+    }
+    public static HashSet<String> retrieveDeviceNames() {
+        String sql = "SELECT device_name FROM device";
+        HashSet result = new HashSet();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String deviceName = resultSet.getString("device_name");
+                result.add(deviceName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
