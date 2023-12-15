@@ -44,7 +44,7 @@ public class UserService {
 
     public UserRes.UserLoginRes login(UserReq.UserLoginReq userLoginReq) throws BaseException, IOException {
 
-        Optional<User> userOptional = userRepository.findByEmail(userLoginReq.getEmail());
+        Optional<User> userOptional = userRepository.findByEmailAndPassword(userLoginReq.getEmail(), userLoginReq.getPassword());
 
         if (userOptional.isEmpty()) {
             throw new BaseException(USERS_NOT_EXISTS);
@@ -113,7 +113,7 @@ public class UserService {
 
     @Transactional
     public void changePassword(String email, String password) throws BaseException {
-        Optional<User> userOptional = userRepository.findByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmailAndPassword(email, password);
         if (userOptional.isEmpty()) {
             throw new BaseException(USERS_NOT_EXISTS);
         }
