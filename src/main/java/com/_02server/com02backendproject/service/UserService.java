@@ -1,12 +1,10 @@
 package com._02server.com02backendproject.service;
 
 import com._02server.com02backendproject.dto.UserRes;
-import com._02server.com02backendproject.repository.CapacityOfUserRepository;
 import com._02server.com02backendproject.repository.UserRepository;
 import com._02server.com02backendproject.dto.UserReq;
 import com._02server.com02backendproject.entities.User;
 import com._02server.com02backendproject.global.BaseException;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final MailService mailService;
-    private final CapacityOfUserRepository capacityOfUserRepository;
 
     public void join(UserReq.UserJoinReq userJoinReq) throws BaseException, IOException {
 
@@ -47,7 +44,7 @@ public class UserService {
 
     public UserRes.UserLoginRes login(UserReq.UserLoginReq userLoginReq) throws BaseException, IOException {
 
-        Optional<User> userOptional = userRepository.findByEmail(userLoginReq.getEmail());
+        Optional<User> userOptional = userRepository.findByEmailAndPassword(userLoginReq.getEmail(), userLoginReq.getPassword());
 
         if (userOptional.isEmpty()) {
             throw new BaseException(USERS_NOT_EXISTS);
@@ -116,7 +113,7 @@ public class UserService {
 
     @Transactional
     public void changePassword(String email, String password) throws BaseException {
-        Optional<User> userOptional = userRepository.findByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmailAndPassword(email, password);
         if (userOptional.isEmpty()) {
             throw new BaseException(USERS_NOT_EXISTS);
         }
